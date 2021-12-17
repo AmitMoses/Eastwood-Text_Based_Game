@@ -31,6 +31,40 @@ class SquareQuarter:
             sc.NPC('dweller', 'GET OUT YOU FILTHY WITCH!')
 
 
+class CircularQuarter:
+    def __init__(self, radios_num, angle_num):
+        self.addresses = np.random.randint(1, 4, size=(radios_num, angle_num), dtype=int)
+        self.dAngle = int(360/angle_num)
+        self.addresses[9, 5] = 0
+
+    def angle_index(self, angle):
+        angle_idx = int(angle / self.dAngle)
+        return angle_idx
+
+    def get_location(self, rho, phi):
+        angle_idx = self.angle_index(phi)
+        radios_idx = rho-1
+        return self.addresses[radios_idx, angle_idx]
+
+    def print_quarter(self):
+        print(self.addresses)
+
+    def goto(self, rho, phi):
+        phi_index = self.angle_index(phi)
+        radios_idx = rho - 1
+        location_index = self.addresses[radios_idx, phi_index]
+        if location_index == 0:
+            sc.narrator('This is the place')
+        elif location_index == 1:
+            sc.narrator('You knock the door, but there is no answer')
+        elif location_index == 2:
+            sc.narrator('Someone open you the door')
+            sc.NPC('Random man', 'You are not my pizza')
+        elif location_index == 3:
+            sc.narrator('As you approach the house someone shout from the window')
+            sc.NPC('dweller', 'phh... another woman, another witch...')
+
+
 def intro_town_square():
     Locations = ['Tavern', 'Church', 'Gallows', 'Quarter A', 'Quarter B', 'Apothecary', 'Unknown road']
     Signs.townSquare()
@@ -162,7 +196,7 @@ def Church():
 
 
 def Gallows():
-    print('Gallows')
+    Signs.gallows()
     sc.narrator('You\'re pulled to the sound of an excited crowd surrounding a raised wooden structure, from which an '
                 'empty noose hangs.')
     sc.narrator('A young woman is led across the creaky platform by a heavyset man clad in black towards the rope '
@@ -204,15 +238,24 @@ def Quarter_A():
             intro_town_square()
 
 
-
 def Quarter_B():
+    phi_pos = list(range(0, 360, 45))  # 10 options,from 1 to 10
+    rho_pos = list(range(1, 10))  # 10 options,from 1 to 10
+    Circular = CircularQuarter(len(rho_pos), len(phi_pos))
     print('Quarter B')
-    print('choose house address:')
-    x_pos = list(range(0, 360, 45))  # 10 options,from 1 to 10
-    y_pos = list(range(1, 3))  # 10 options,from 1 to 10
-    x_loc = tc.input_commend(x_pos, 'enter X coordinate:', show_options=False, text_check=True)
-    y_loc = tc.input_commend(y_pos, 'enter Y coordinate:', show_options=False, text_check=True)
-    print(x_loc, y_loc)
+    while True:
+        options = ['Visit a house']
+        answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False)
+        if answer == 1:
+            print('choose house address:')
+            rho_loc = int(tc.input_commend(rho_pos, 'enter rho coordinate:', show_options=True, text_check=True))
+            phi_loc = int(tc.input_commend(phi_pos, 'enter phi coordinate:', show_options=True, text_check=True))
+            print(Circular.get_location(rho_loc, phi_loc))
+            Circular.goto(rho_loc, phi_loc)
+            Circular.print_quarter()
+        elif answer == 2:
+            sc.player('I should go back..')
+            intro_town_square()
 
 
 def Apothecary():
