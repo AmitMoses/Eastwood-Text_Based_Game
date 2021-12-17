@@ -31,14 +31,14 @@ class SquareQuarter:
             sc.NPC('dweller', 'GET OUT YOU FILTHY WITCH!')
 
 
-def intro_town_square():
+async def intro_town_square():
     Locations = ['Tavern', 'Church', 'Gallows', 'Quarter A', 'Quarter B', 'Apothecary', 'Unknown road']
     Signs.townSquare()
     sc.narrator("You can see around you:")
     # Signs.options(Locations)
     # answer = input("Where to you want to go?")
     # answer = tc.input_check(answer, Locations, "Where to you want to go?")
-    answer = tc.input_commend(Locations, "Where to you want to go?", getback=False)
+    answer = await tc.input_commend(Locations, "Where to you want to go?", getback=False)
     if answer == 'tavern':
         Tavern()
     elif answer == 'church':
@@ -162,7 +162,7 @@ def Church():
 
 
 def Gallows():
-    print('Gallows')
+    Signs.gallows()
     sc.narrator('You\'re pulled to the sound of an excited crowd surrounding a raised wooden structure, from which an '
                 'empty noose hangs.')
     sc.narrator('A young woman is led across the creaky platform by a heavyset man clad in black towards the rope '
@@ -218,8 +218,8 @@ def Quarter_B():
 def Apothecary():
     Signs.apothecary()
     sc.narrator('As you get close, you notice a wooden store and little garden')
-    sc.narrator('From the outside this store looks nice and traditional with apothecary sign on it.')
-    sc.narrator('It has been built with white pine wood and has walnut wood decorations.')
+    sc.narrator('From the outside this store looks a giant mushroom with apothecary sign on it.')
+    sc.narrator('It has been built with white pine wood and has red wood rooftop decorated with white spots.')
     sc.narrator('Small, half rounded windows brighten up the house and have been added to the house in a very '
                 'asymmetric way.')
     sc.narrator('You can see long shelf full of potion behind the windows.')
@@ -246,3 +246,7 @@ def Unknown_road():
     Signs.danger()
     sc.player('I can\'t take this risk rigt now, I should go back...')
     intro_town_square()
+
+
+if __name__ == "__main__":
+    print("s")

@@ -1,10 +1,18 @@
+import asyncio
+import multiprocessing
+import threading
+from multiprocessing import Process, shared_memory
+from multiprocessing.managers import BaseManager
+
 import Signs
 import Sentences as sn
 import TestCheck as tc
 import Areas
+from DoTheInput import init_reader
+from StoryStructure import get_start_zone
 
 
-def intro():
+async def intro():
     sn.narrator('Hey Roni')
     sn.narrator('You woke up alone in middle of unfamiliar road...')
     sn.narrator('The sky are cloudy and everything look grey...')
@@ -13,25 +21,51 @@ def intro():
     sn.player('What is this place?')
 
     Signs.openSign()
-    answer = tc.input_commend(['yes', 'no'], "Do you wish to continue? [yes/no]", show_options=False, getback=False)
+    answer = await tc.input_commend(['yes', 'no'], "Do you wish to continue? [yes/no]", show_options=False, getback=False)
     return answer
 
 
-def main():
-    # Definitions:
-    Locations = ['Tavern', 'Church', 'Gallows', 'Quarter A', 'Quarter B', 'Apothecary', 'Unknown road']
+async def main(qu):
 
-    # intro
-    answer = intro()
-    if answer.lower().strip() == "yes":
-        sn.narrator('(EVERY THING LOOKS DIM)')
-        sn.narrator('As you begin to walk towards Eastwood, you can barely fill the thin air around you...')
-        sn.narrator('The path looks abandoned, like nobody take it for a while..')
-        sn.narrator('You arrived to the middle of small town... Eastwood as the old sign described..')
-        Areas.intro_town_square()
-    elif answer.lower().strip() == "no":
-        sn.player('Maybe another day..')
+    reader = tc.MosesReader(qu)
+    writer = sn.Writer()
+
+    await get_start_zone(reader, writer).do_story()
+
+    return
+    # Definitions:
+
+
+class Moses_q(BaseManager):
+    pass
+
+Moses_q.register("Qu", asyncio.Queue)
+
+async def ionit_moses(q):
+    return await asyncio.create_task(init_reader(q))
+
+async def init_main(qu):
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    return await loop.run_until_complete(main(qu))
+
+async def method_name():
+
+    m = Moses_q()
+    m.start()
+
+    s = m.Qu()
+    #
+    # s=""
+    pool = multiprocessing.Pool(2)
+    pool.apply_async(func=init_main, args=(s,))
+    pool.apply_async(func=init_reader, args=(s,))
+
+    # Process(target=ionit_moses, args=(s,)).start()
+    # Process(target=main, args=(s,)).start()
 
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(method_name())
+    # asyncio.run(main())
+    # asyncio.run(init_reader())
