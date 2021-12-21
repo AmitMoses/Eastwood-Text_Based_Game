@@ -31,6 +31,7 @@ class SquareQuarter:
             sc.NPC('dweller', 'GET OUT YOU FILTHY WITCH!')
 
 
+
 class CircularQuarter:
     def __init__(self, radios_num, angle_num):
         self.addresses = np.random.randint(1, 4, size=(radios_num, angle_num), dtype=int)
