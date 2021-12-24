@@ -2,6 +2,7 @@ import Sentences as sc
 import Signs
 import TestCheck as tc
 import numpy as np
+import player as pl
 
 
 class SquareQuarter:
@@ -29,7 +30,6 @@ class SquareQuarter:
         elif location_index == 3:
             sc.narrator('As you approach the house someone shout from the window')
             sc.NPC('dweller', 'GET OUT YOU FILTHY WITCH!')
-
 
 
 class CircularQuarter:
@@ -116,6 +116,7 @@ def Tavern():
             pass
         elif answer == 2:     # Approach the people
             print('Approach the people')
+            pl.Roni.addItem(pl.Roni.KeyItems[0])
             pass
         elif answer == 3:     # Talk to the stranger
             print('Talk to the stranger')
@@ -288,5 +289,20 @@ def Apothecary():
 def Unknown_road():
     sc.narrator('After five minutes walk you encounter a sign:')
     Signs.danger()
-    sc.player('I can\'t take this risk rigt now, I should go back...')
-    intro_town_square()
+    req_item = pl.Roni.KeyItems[0]
+    if pl.Roni.checkBag(req_item):
+        sc.narrator('You have {}'.format(req_item))
+        sc.player('I can pass this now')
+        while True:
+            options = ["The Dark Forest", "The Swamps"]
+            answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False)
+            if answer == 1:     # The Dark Forest
+                print('The Dark Forest')
+            elif answer == 2:   # The Swamps
+                print('The Swamps')
+            elif answer == 3:   # return
+                sc.player('I should go back..')
+                intro_town_square()
+    else:
+        sc.player('I can\'t take this risk rigt now, I should go back...')
+        intro_town_square()

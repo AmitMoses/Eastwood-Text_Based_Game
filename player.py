@@ -5,31 +5,44 @@ class Player:
     def __init__(self):
         self.HP = 100
         self.bag = []
-        self.keys = []
+        self.potion = []
+        self.PotionRecipes = {
+            "A": ['a1', 'a2'],
+            "B": ['b1', 'b2'],
+            "C": ['c1', 'c2']
+        }
+        self.KeyItems = ['key_1', 'key_2', 'key_3']
 
     def addItem(self, item):
+        sc.narrator('Congratulation! {} added to your item bag'.format(item))
         self.bag.append(item)
 
     def lookBag(self):
         print("Bag:" + str(self.bag))
 
-    def lookKey(self):
-        print("Keys:" + str(self.keys))
+    def lookPotion(self):
+        print("Keys:" + str(self.potion))
 
-    def checkKeys(self, key):
-        isKey = False
-        if key in self.keys:
-            isKey = True
-        return isKey
+    def checkPotion(self, potion):
+        isPotion = False
+        if potion in self.potion:
+            isPotion = True
+        return isPotion
 
-    def checkBag(self, key):
-        isKey = False
-        if key in self.bag:
-            isKey = True
-        return isKey
+    def checkBag(self, item):
+        isItem = False
+        if item in self.bag:
+            isItem = True
+        return isItem
 
-    def makePotion(self, Ingredients):
+    def makePotion(self, Recipe):
+        if Recipe in self.PotionRecipes.keys():
+            print("you know this recipe!")
+        else:
+            print("unknown recipe")
+            return
         isIng = True
+        Ingredients = self.PotionRecipes[Recipe]
         for ing in Ingredients:
             if not self.checkBag(ing):
                 sc.narrator('you lack of: ' + ing)
@@ -39,23 +52,22 @@ class Player:
         else:
             for ing in Ingredients:
                 self.bag.remove(ing)
-            self.keys.append('potion')
+            self.potion.append(Recipe)
 
+
+Roni = Player()
 
 def main():
     roni = Player()
-    recipe = ['a', 'b', 'c']
+    recipe = "A"
     roni.lookBag()
-    roni.lookKey()
+    roni.lookPotion()
     roni.makePotion(recipe)
-    roni.addItem('a')
-    roni.addItem('b')
-    roni.addItem('c')
+    roni.addItem('a1')
+    roni.addItem('a2')
     roni.makePotion(recipe)
     roni.lookBag()
-    roni.lookKey()
-
-
+    roni.lookPotion()
 
 
 if __name__ == '__main__':

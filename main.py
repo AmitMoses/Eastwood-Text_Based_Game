@@ -2,6 +2,7 @@ import Signs
 import Sentences as sn
 import TestCheck as tc
 import Areas
+import player as pl
 
 
 def intro():

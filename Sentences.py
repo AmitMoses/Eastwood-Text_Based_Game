@@ -5,13 +5,13 @@ from pynput import keyboard
 
 
 # Time delay parameters:
-# a = 2.5
-# b = 0.2
-# c = 0.08
+a = 2.5
+b = 0.2
+c = 0.08
 
-a = 0
-b = 0
-c = 0
+# a = 0
+# b = 0
+# c = 0
 
 
 def narrator(text):
