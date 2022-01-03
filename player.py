@@ -4,7 +4,7 @@ import Sentences as sc
 class Player:
     def __init__(self):
         self.HP = 100
-        self.bag = []
+        self.bag = ["key_1"]
         self.potion = []
         self.PotionRecipes = {
             "A": ['a1', 'a2'],

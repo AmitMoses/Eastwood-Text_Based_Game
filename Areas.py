@@ -66,6 +66,91 @@ class CircularQuarter:
             sc.NPC('dweller', 'phh... another woman, another witch...')
 
 
+class ForestMaze:
+    def __init__(self):
+        self.x = 0
+        self.y = 0
+        self.width = 10
+        self.height = 9
+        self.wall = 0
+        self.clear = 1
+        self.goal_mansion = 9
+        self.goal_cave = 8
+        self.goal_man = 7
+        self.maze = np.array([
+            [1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1],
+            [1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1],
+            [1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0],
+            [0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1],
+            [7, 0, 0, 0, 0, 1, 0, 8, 0, 0, 1],
+            [1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0],
+            [1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 9],
+            [0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1]
+        ])
+
+    def get_location(self):
+        print('x: {}, y: {}'.format(self.x, self.y))
+
+    def printMaze(self):
+        print(self.maze)
+
+    def ifTarget(self):
+        if self.maze[self.y][self.x] == self.goal_mansion:
+            print('out of maze')
+            return True
+        elif self.maze[self.y][self.x] == self.goal_cave:
+            print('cave')
+            return True
+        elif self.maze[self.y][self.x] == self.goal_man:
+            print('man')
+            return True
+        else:
+            return False
+
+    def blockCheck(self, x, y):
+        isBlock = False
+        print('blockCheck, x = {}, y = {}'.format(x,y))
+        if x < 0 or x > self.width or y < 0 or y > self.height:
+            print('out of maze')
+            isBlock = True
+        elif self.maze[y][x] == self.wall:
+            print('wall')
+            isBlock = True
+
+        return isBlock
+
+    def move(self, direction):
+        if direction == 'w':
+            if self.blockCheck(self.x, self.y-1):
+                sc.narrator("You blocked by a tree")
+            else:
+                self.y = self.y - 1
+
+        elif direction == 's':
+            if self.blockCheck(self.x, self.y+1):
+                sc.narrator("You blocked by a tree")
+            else:
+                self.y = self.y + 1
+
+        elif direction == 'd':
+            if self.blockCheck(self.x+1, self.y):
+                sc.narrator("You blocked by a tree")
+            else:
+                self.x = self.x + 1
+
+        elif direction == 'a':
+            if self.blockCheck(self.x-1, self.y):
+                sc.narrator("You blocked by a tree")
+            else:
+                self.x = self.x - 1
+
+        self.get_location()
+        self.printMaze()
+        self.ifTarget()
+
+
 def intro_town_square():
     Locations = ['Tavern', 'Church', 'Gallows', 'Quarter A', 'Quarter B', 'Apothecary', 'Unknown road']
     Signs.townSquare()
@@ -297,7 +382,7 @@ def Unknown_road():
             options = ["The Dark Forest", "The Swamps"]
             answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False)
             if answer == 1:     # The Dark Forest
-                print('The Dark Forest')
+                TheDarkForest()
             elif answer == 2:   # The Swamps
                 print('The Swamps')
             elif answer == 3:   # return
@@ -306,3 +391,25 @@ def Unknown_road():
     else:
         sc.player('I can\'t take this risk rigt now, I should go back...')
         intro_town_square()
+
+
+def TheDarkForest():
+    sc.narrator('You walk slowly into the tall trees in the beginning of the forest')
+    sc.narrator('As you enter you notice a large bolder with engraving:')
+    sc.narrator('To Return: \" Revertere hic \" ')
+    sc.narrator('What do you want to do?')
+    while True:
+        options = ["Enter into th forest", "return"]
+        answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False)
+        if answer == 1:  # The Dark Forest
+            print('Enter The Dark Forest')
+            Maze = ForestMaze()
+            while True:
+                options = ['w', 's', 'd', 'a']
+                answer = tc.input_commend(options, "Which direction?", text_check=True)
+                Maze.move(answer)
+        elif answer == 2:  # return
+            sc.player('I should go back..')
+            Unknown_road()
+
+
