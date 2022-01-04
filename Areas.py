@@ -154,6 +154,26 @@ class ForestMaze:
         self.ifTarget()
 
 
+class Swamp:
+    def __init__(self):
+        self.correct_path = ['stone',  'tree', 'mud']
+        self.options = ['Stone', 'Tree', 'Fog', 'Mud', 'Locum Tutum']
+        self.path = []
+
+    def move(self):
+        while True:
+            sc.narrator('There are in the swamps a lot of trees, stones, deep mud and places with heavy fog')
+            answer = tc.input_commend(self.options, "Which way is for you to go?[Enter number]", getback=False)
+            if answer == 'locum tutum':
+                TheSwamp(method='spell')
+            else:
+                self.path.append(answer)
+                print(self.path)
+                if len(self.path) >= len(self.correct_path):
+                    if self.path[-len(self.correct_path)::] == self.correct_path:
+                        print('Found it!')
+
+
 def intro_town_square():
     Locations = ['Tavern', 'Church', 'Gallows', 'Quarter A', 'Quarter B', 'Apothecary', 'Unknown road']
     Signs.townSquare()
@@ -374,26 +394,31 @@ def Apothecary():
             intro_town_square()
 
 
-def Unknown_road():
-    sc.narrator('After five minutes walk you encounter a sign:')
-    Signs.danger()
-    req_item = pl.Roni.KeyItems[0]
-    if pl.Roni.checkBag(req_item):
-        sc.narrator('You have {}'.format(req_item))
-        sc.player('I can pass this now')
-        while True:
-            options = ["The Dark Forest", "The Swamps"]
-            answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False)
-            if answer == 1:     # The Dark Forest
-                TheDarkForest()
-            elif answer == 2:   # The Swamps
-                print('The Swamps')
-            elif answer == 3:   # return
-                sc.player('I should go back..')
-                intro_town_square()
-    else:
-        sc.player('I can\'t take this risk rigt now, I should go back...')
-        intro_town_square()
+def Unknown_road(method='from town'):
+    if method == 'from town':
+        sc.narrator('After five minutes walk you encounter a sign:')
+        Signs.danger()
+        req_item = pl.Roni.KeyItems[0]
+        if pl.Roni.checkBag(req_item):
+            sc.narrator('You have {}'.format(req_item))
+            sc.player('I can pass this now')
+        else:
+            sc.player('I can\'t take this risk rigt now, I should go back...')
+            intro_town_square()
+        sc.narrator('After ten more minutes you encounter a crossroad')
+    elif method == 'back from':
+        sc.narrator('You walk all the way back to the crossroad')
+    while True:
+        options = ["The Dark Forest", "The Swamps"]
+        answer = tc.input_commend(options, "Where do you like to go?[Enter number]", text_check=False)
+        if answer == 1:     # The Dark Forest
+            TheDarkForest()
+        elif answer == 2:   # The Swamps
+            print('The Swamps')
+            TheSwamp()
+        elif answer == 3:   # return
+            sc.player('I should go back..')
+            intro_town_square()
 
 
 def TheDarkForest(method='walk'):
@@ -459,7 +484,7 @@ def TheDarkForest(method='walk'):
 
         elif answer == 2:  # return
             sc.player('I should go back..')
-            Unknown_road()
+            Unknown_road(method='back from')
 
 
 def Cave():
@@ -541,3 +566,39 @@ def oldMansion():
         elif answer == 3:
             sc.player('Revertere hic...')
             TheDarkForest(method='return spell')
+
+
+def TheSwamp(method='walk'):
+    if method == 'walk':
+        sc.narrator('Go to the swamp...')
+    elif method == 'spell':
+        sc.narrator('teleport to the swamp')
+    while True:
+        options = ["Go deep into the swamp", "Go to the old hut"]
+        answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False)
+        # Go deep into the swamp
+        if answer == 1:
+            print('Go deep into the swamp')
+            TheSwamp = Swamp()
+            TheSwamp.move()
+            pass
+        # Go to the old hut
+        elif answer == 2:
+            print('Go to the old hut')
+            sc.narrator('Inside the hut living a fisherman and his wife')
+            while True:
+                options = ["Talk to the fisherman", "Talk to the fisherman's wife", "Live th hut"]
+                answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False, getback=False)
+                # Talk to the fisherman
+                if answer == 1:
+                    sc.NPC('Fisherman', 'Im am a fisherman')
+                elif answer == 2:
+                    sc.NPC('Fisherman\'s wife', 'Im am a wife')
+                elif answer == 3:
+                    sc.narrator('You live the hut')
+                    break
+            pass
+        # Return to the town square
+        elif answer == 3:
+            sc.player('I should go back..')
+            Unknown_road(method='back from')
