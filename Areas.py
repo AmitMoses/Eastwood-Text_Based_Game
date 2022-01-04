@@ -146,6 +146,9 @@ class ForestMaze:
             else:
                 self.x = self.x - 1
 
+        elif direction.lower() == 'revertere hic':
+            TheDarkForest(method='return spell')
+
         self.get_location()
         self.printMaze()
         self.ifTarget()
@@ -393,23 +396,148 @@ def Unknown_road():
         intro_town_square()
 
 
-def TheDarkForest():
-    sc.narrator('You walk slowly into the tall trees in the beginning of the forest')
-    sc.narrator('As you enter you notice a large bolder with engraving:')
-    sc.narrator('To Return: \" Revertere hic \" ')
+def TheDarkForest(method='walk'):
+    if method == 'walk':
+        sc.narrator('You walk slowly into the tall trees in the beginning of the forest')
+        sc.narrator('As you enter you notice a large bolder with engraving:')
+        sc.narrator('To Return: \" Revertere hic \" ')
+    elif method == 'return spell':
+        sc.narrator('Everything around you start to spin very fast')
+        sc.narrator('and then, vanished and replaced by familiar place - The forest entrance')
     sc.narrator('What do you want to do?')
     while True:
-        options = ["Enter into th forest", "return"]
-        answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False)
+        options = ["Enter into th forest", "Return"]
+        answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False, getback=False)
         if answer == 1:  # The Dark Forest
             print('Enter The Dark Forest')
             Maze = ForestMaze()
             while True:
-                options = ['w', 's', 'd', 'a']
-                answer = tc.input_commend(options, "Which direction?", text_check=True)
+                options = ['w', 's', 'd', 'a', 'Revertere hic']
+                answer = tc.input_commend(options, "Which direction?", text_check=True, getback=False)
                 Maze.move(answer)
+                # Old Mansion
+                if Maze.maze[Maze.y][Maze.x] == Maze.goal_mansion:
+                    print('out of maze')
+                    options = ["Go out form the forest", "Stay in the forest"]
+                    answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False,
+                                              getback=False)
+                    # Go out form the forest
+                    if answer == 1:
+                        print('Go out form the forest')
+                        oldMansion()
+                    # Stay in the forest
+                    elif answer == 2:
+                        print('Stay in the forest')
+                        pass
+                # Cave
+                elif Maze.maze[Maze.y][Maze.x] == Maze.goal_cave:
+                    print('cave')
+                    options = ["Go inside the Cave", "Stay in the forest"]
+                    answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False,
+                                              getback=False)
+                    # Go inside the Cave
+                    if answer == 1:
+                        print('Go inside the Cave')
+                        Cave()
+                    # Stay in the forest
+                    elif answer == 2:
+                        print('Stay in the forest')
+                        pass
+                # Lost Man
+                elif Maze.maze[Maze.y][Maze.x] == Maze.goal_man:
+                    print('man')
+                    options = ["Talk to the lost man", "Ignore the lost man"]
+                    answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False,
+                                              getback=False)
+                    # Talk to the lost man
+                    if answer == 1:
+                        print('Talk to the lost man')
+                    # Ignore the lost man
+                    elif answer == 2:
+                        print('Stay in the forest')
+                        pass
+
         elif answer == 2:  # return
             sc.player('I should go back..')
             Unknown_road()
 
 
+def Cave():
+    sc.narrator('You enter the cave')
+    sc.narrator('You see an old witch-like lady and glooming mushrooms')
+    while True:
+        options = ["Talk with the witch", "Examine the mushrooms", "Go back to the Forest"]
+        answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False, getback=False)
+        # Talk with the witch
+        if answer == 1:
+            print('Talk with the witch')
+            pass
+        # Examine the mushrooms
+        elif answer == 2:
+            print('Examine the mushrooms')
+            pass
+        # Go back to the Forest
+        elif answer == 3:
+            sc.player('Revertere hic...')
+            TheDarkForest(method='return spell')
+
+
+def oldMansion():
+    sc.narrator('You enter an old mansion')
+    while True:
+        options = ["Explore the outside", "Enter the mansion", "Go back to the Forest"]
+        answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False, getback=False)
+        # Explore the outside
+        if answer == 1:
+            print('Explore the outside')
+            sc.narrator('You see an old witch, a god and sleeping dragon')
+            while True:
+                options = ["Talk with the old witch", "Pet the dog", "Examine the sleeping dragon", "Go back"]
+                answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False,
+                                          getback=False)
+                # Talk with the old witch
+                if answer == 1:
+                    print('Talk with the old witch')
+                    pass
+                # Pet the dog
+                elif answer == 2:
+                    print('Pet the dog')
+                    pass
+                # Examine the sleeping dragon
+                elif answer == 3:
+                    print('Examine the sleeping dragon')
+                    pass
+                # Go back
+                elif answer == 4:
+                    sc.player('enough with the exploration')
+                    break
+            pass
+        # Enter the mansion
+        elif answer == 2:
+            print('Enter the mansion')
+            sc.narrator('you see a picture, armor and old rune')
+            while True:
+                options = ["Picture", "Armor", "Old rune", "Nothing (go back)"]
+                answer = tc.input_commend(options, "What would you like to examine?[Enter number]", text_check=False,
+                                          getback=False)
+                # Picture
+                if answer == 1:
+                    print('Picture')
+                    pass
+                # Armor
+                elif answer == 2:
+                    print('Armor')
+                    pass
+                # Old rune
+                elif answer == 3:
+                    print('Old rune')
+                    pass
+                # Nothing (go back)
+                elif answer == 4:
+                    sc.player('enough with the exploration')
+                    break
+            pass
+        # Go back to the Forest
+        elif answer == 3:
+            sc.player('Revertere hic...')
+            TheDarkForest(method='return spell')
