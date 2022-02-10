@@ -1,7 +1,6 @@
 import time
 import sys
-# import keyboard
-from pynput import keyboard
+
 
 
 # Time delay parameters:
@@ -36,7 +35,7 @@ def player(text):
 
 def NPC(name, text):
     text = '"'+text+'"'
-    print(name+':', end =" ")
+    print(name+':', end=" ")
     for character in text:
         sys.stdout.write(character)
         sys.stdout.flush()

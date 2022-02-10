@@ -36,7 +36,7 @@ class CircularQuarter:
     def __init__(self, radios_num, angle_num):
         self.addresses = np.random.randint(1, 4, size=(radios_num, angle_num), dtype=int)
         self.dAngle = int(360/angle_num)
-        self.addresses[9, 5] = 0
+        self.addresses[8, 5] = 0
 
     def angle_index(self, angle):
         angle_idx = int(angle / self.dAngle)
