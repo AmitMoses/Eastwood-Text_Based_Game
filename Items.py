@@ -1,5 +1,4 @@
 
-
 itemdict = {
     "V1": "Holy water",
     "V2": "Wooden stake",
@@ -25,7 +24,12 @@ itemdict = {
     "L7": "Musk Oil",
     "L8": "Conjurer's Hair",
     "L9": "Pepper Red",
-
+    "M1": "Hairy Grisette",
+    "M2": "Trompeta Gray Saddle",
+    "M3": "Death Earthball",
+    "M4": "Coral Widow",
+    "M5": "Cloudy Brittlegill",
+    "URP": "Unknown-road-pass"
 }
 
 

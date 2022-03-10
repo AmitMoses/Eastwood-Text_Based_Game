@@ -3,7 +3,8 @@ import Signs
 import TestCheck as tc
 import numpy as np
 import player as pl
-
+import Items as IT
+import trading_house as market
 
 class SquareQuarter:
     def __init__(self, max_x, max_y):
@@ -383,7 +384,9 @@ def Apothecary():
         # Go inside the store
         if answer == 1:
             print('enter the store')
-            pass
+            sc.narrator("Hey this is the apothecary store")
+            market.ApothecaryStore.showGoods()
+            pl.Roni = market.ApothecaryStore.buy(pl.Roni)
         # Walk to the garden
         elif answer == 2:
             print('Walk to the garden')
@@ -398,9 +401,9 @@ def Unknown_road(method='from town'):
     if method == 'from town':
         sc.narrator('After five minutes walk you encounter a sign:')
         Signs.danger()
-        req_item = pl.Roni.KeyItems[0]
+        req_item = 'URP'
         if pl.Roni.checkBag(req_item):
-            sc.narrator('You have {}'.format(req_item))
+            sc.narrator(f'You have {IT.itemdict[req_item]}')
             sc.player('I can pass this now')
         else:
             sc.player('I can\'t take this risk rigt now, I should go back...')
