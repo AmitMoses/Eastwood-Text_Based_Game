@@ -9,7 +9,8 @@ import trading_house as market
 class SquareQuarter:
     def __init__(self, max_x, max_y):
         self.addresses = np.random.randint(1, 4, size=(max_x, max_y), dtype=int)
-        self.addresses[5, 8] = 0
+        self.addresses[6, 8] = 0
+        self.addresses[1, 4] = 10
 
     def get_location(self, x_pos, y_pos):
         return self.addresses[x_pos, y_pos]
@@ -19,8 +20,10 @@ class SquareQuarter:
 
     def goto(self, x_pos, y_pos):
         location_index = self.addresses[x_pos, y_pos]
+        # hunted house
         if location_index == 0:
             sc.narrator('This is the place')
+        # Random houses
         elif location_index == 1:
             sc.narrator('You knock the door, but there is no answer')
         elif location_index == 2:
@@ -31,6 +34,13 @@ class SquareQuarter:
         elif location_index == 3:
             sc.narrator('As you approach the house someone shout from the window')
             sc.NPC('dweller', 'GET OUT YOU FILTHY WITCH!')
+        # Black Market
+
+        elif location_index == 10:
+            sc.narrator('You knock the door...')
+            sc.narrator('Someone ask you from inside')
+            sc.NPC('???', 'Who is this?')
+            pl.Roni = market.BlackMarket.enter(pl.Roni)
 
 
 class CircularQuarter:
@@ -77,7 +87,7 @@ class ForestMaze:
         self.clear = 1
         self.goal_mansion = 9
         self.goal_cave = 8
-        self.goal_man = 7
+        self.goal_naked_tree = 7
         self.maze = np.array([
             [1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1],
             [1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1],
@@ -104,8 +114,8 @@ class ForestMaze:
         elif self.maze[self.y][self.x] == self.goal_cave:
             print('cave')
             return True
-        elif self.maze[self.y][self.x] == self.goal_man:
-            print('man')
+        elif self.maze[self.y][self.x] == self.goal_naked_tree:
+            print('naked_tree')
             return True
         else:
             return False
@@ -385,11 +395,15 @@ def Apothecary():
         if answer == 1:
             print('enter the store')
             sc.narrator("Hey this is the apothecary store")
-            market.ApothecaryStore.showGoods()
-            pl.Roni = market.ApothecaryStore.buy(pl.Roni)
+            # market.ApothecaryStore.showGoods()
+            # pl.Roni = market.ApothecaryStore.buy(pl.Roni)
+            pl.Roni = market.ApothecaryStore.enter(pl.Roni)
         # Walk to the garden
         elif answer == 2:
             print('Walk to the garden')
+            # market.ApothecaryGarden.showGoods()
+            # pl.Roni = market.ApothecaryStore.buy(pl.Roni)
+            pl.Roni = market.ApothecaryGarden.enter(pl.Roni)
             pass
         # Return to the town square
         elif answer == 3:

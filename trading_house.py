@@ -7,20 +7,24 @@ import Sentences as sc
 class Shop:
     def __init__(self, item_dic, oos=[]):
         self.items = item_dic
-        # self.out_of_stock = oos
-        self.out_of_stock = {IT.itemdict[k] for k in oos}
+        self.out_of_stock = oos
+        # self.out_of_stock = {IT.itemdict[k] for k in oos}
 
     def printItems(self):
         print(self.items)
 
     def showGoods(self):
+
         index = 1
         for key, value in self.items.items():
             print(f'{index}. {value}')
             index = index + 1
+        print(f'{index}. Nothing')
+
 
     def buy(self, playerObj):
         ItemsList = list(self.items.values())
+        ItemsList.append(0)
         IDList = list(self.items.keys())
 
         # print(IDList)
@@ -29,7 +33,9 @@ class Shop:
             answer = tc.input_commend(ItemsList, "What would you like to purchase?[Enter number]",
                                       show_options=False, text_check=False, getback=False)
             selected_item_index = answer - 1
-
+            if answer == len(ItemsList):
+                isShop = False
+                break
             # print("Check OOS")
             # print(ItemsList[selected_item_index])
             # print(self.out_of_stock)
@@ -88,6 +94,11 @@ class Shop:
 
         return playerObj
 
+    def enter(self, playerObj):
+        self.showGoods()
+        playerObj = self.buy(playerObj)
+        return playerObj
+
 
 def get_sub_dic(sub_list):
     sub_dic = {k: IT.itemdict[k] for k in sub_list if k in IT.itemdict}
@@ -104,11 +115,12 @@ ApothecaryStore = Shop(item_dic=apothecary_store_dic, oos=items_apothecary_store
 # Apothecary garden
 items_apothecary_garden = ["G4", "A4", "A5", "L5", "L6"]
 apothecary_garden_dic = get_sub_dic(items_apothecary_garden)
+ApothecaryGarden = Shop(item_dic=apothecary_garden_dic)
 
 # Black Market
 items_black_market = ["A3", "S1", "S2", "L7", "L8"]
 black_market_dic = get_sub_dic(items_black_market)
-
+BlackMarket = Shop(item_dic=black_market_dic)
 
 def main():
     # Apothecary store
@@ -127,7 +139,8 @@ def main():
 
     print(IT.itemdict.items())
     print(IT.itemdict["A1"])
-    Market = Shop(item_dic=apothecary_store_dic, oos=items_apothecary_store_oos)
+    # Market = Shop(item_dic=apothecary_store_dic, oos=items_apothecary_store_oos)
+    Market = Shop(item_dic=apothecary_garden_dic)
     Market.printItems()
     Market.showGoods()
     pl.Roni = Market.buy(pl.Roni)
