@@ -1,20 +1,18 @@
 import Sentences as sc
-
+import Items as IT
 
 class Player:
     def __init__(self):
         self.HP = 100
         self.bag = ["key_1"]
         self.potion = []
-        self.PotionRecipes = {
-            "A": ['a1', 'a2'],
-            "B": ['b1', 'b2'],
-            "C": ['c1', 'c2']
-        }
+        self.PotionRecipes = IT.PotionRecipes_dict
         self.KeyItems = ['key_1', 'key_2', 'key_3']
 
-    def addItem(self, item):
-        sc.narrator('Congratulation! {} added to your item bag'.format(item))
+
+    def addItem(self, item_id):
+        item = IT.itemdict[item_id]
+        sc.narrator(f'Congratulation! {item} added to your item bag')
         self.bag.append(item)
 
     def lookBag(self):
@@ -29,7 +27,8 @@ class Player:
             isPotion = True
         return isPotion
 
-    def checkBag(self, item):
+    def checkBag(self, item_id):
+        item = IT.itemdict[item_id]
         isItem = False
         if item in self.bag:
             isItem = True
@@ -37,7 +36,7 @@ class Player:
 
     def makePotion(self, Recipe):
         if Recipe in self.PotionRecipes.keys():
-            print("you know this recipe!")
+            sc.player("I know this recipe!")
         else:
             print("unknown recipe")
             return
@@ -51,8 +50,9 @@ class Player:
             sc.narrator('You need to get all the require ingredients')
         else:
             for ing in Ingredients:
-                self.bag.remove(ing)
+                self.bag.remove(IT.itemdict[ing])
             self.potion.append(Recipe)
+            sc.narrator(f"you just make a {Recipe}!")
 
 
 Roni = Player()
@@ -63,11 +63,11 @@ def main():
     roni.lookBag()
     roni.lookPotion()
     roni.makePotion(recipe)
-    roni.addItem('a1')
-    roni.addItem('a2')
+    # roni.addItem('A1')
+    roni.addItem('A2')
     roni.makePotion(recipe)
-    roni.lookBag()
-    roni.lookPotion()
+    # roni.lookBag()
+    # roni.lookPotion()
 
 
 if __name__ == '__main__':
