@@ -37,9 +37,13 @@ class Shop:
                 isShop = False
                 break
             # print("Check OOS")
-            # print(ItemsList[selected_item_index])
-            # print(self.out_of_stock)
-            if ItemsList[selected_item_index] in self.out_of_stock:
+            print(selected_item_index)
+            print(ItemsList[selected_item_index])
+            print(self.out_of_stock)
+
+            item_id = list(self.items.keys())[list(self.items.values()).index(ItemsList[selected_item_index])]
+            print(item_id)
+            if item_id in self.out_of_stock:
 
                 # Dried rhubarb leaf | Bay leaves | Rose Petals | Catnip
                 if ItemsList[selected_item_index] == IT.itemdict["G4"] or \
@@ -139,12 +143,16 @@ def main():
 
     print(IT.itemdict.items())
     print(IT.itemdict["A1"])
+
+    print(list(IT.itemdict.keys())[list(IT.itemdict.values()).index("Laurel leaves")])
+    # print(get_key_by_value("Laurel leaves"))
     # Market = Shop(item_dic=apothecary_store_dic, oos=items_apothecary_store_oos)
-    Market = Shop(item_dic=apothecary_garden_dic)
+    Market = Shop(item_dic=apothecary_store_dic, oos=items_apothecary_store_oos)
     Market.printItems()
     Market.showGoods()
     pl.Roni = Market.buy(pl.Roni)
     # pl.Roni.lookBag()
+
 
 
 if __name__ == '__main__':

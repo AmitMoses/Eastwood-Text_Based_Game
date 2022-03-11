@@ -6,6 +6,7 @@ import player as pl
 import Items as IT
 import trading_house as market
 
+
 class SquareQuarter:
     def __init__(self, max_x, max_y):
         self.addresses = np.random.randint(1, 4, size=(max_x, max_y), dtype=int)
@@ -395,9 +396,26 @@ def Apothecary():
         if answer == 1:
             print('enter the store')
             sc.narrator("Hey this is the apothecary store")
-            # market.ApothecaryStore.showGoods()
-            # pl.Roni = market.ApothecaryStore.buy(pl.Roni)
-            pl.Roni = market.ApothecaryStore.enter(pl.Roni)
+            while True:
+                options_2 = ["Purchase ingredients", "Look inside my bag", "Exit the store"]
+                answer_2 = tc.input_commend(options_2, "Would you like enter the store?[Enter number]",
+                                            text_check=False, getback=False)
+                # Purchase ingredients
+                if answer_2 == 1:
+                    # market.ApothecaryStore.showGoods()
+                    # pl.Roni = market.ApothecaryStore.buy(pl.Roni)
+                    pl.Roni = market.ApothecaryStore.enter(pl.Roni)
+                    sc.narrator('Anything else you wish to do?')
+                    pass
+                # Look inside my bag
+                if answer_2 == 2:
+                    sc.narrator('You check the items in your bag')
+                    pl.Roni.lookBag()
+                    pass
+                # Exit the store
+                if answer_2 == 3:
+                    sc.narrator('You exit the store')
+                    break
         # Walk to the garden
         elif answer == 2:
             print('Walk to the garden')
@@ -486,18 +504,24 @@ def TheDarkForest(method='walk'):
                         print('Stay in the forest')
                         pass
                 # Lost Man
-                elif Maze.maze[Maze.y][Maze.x] == Maze.goal_man:
-                    print('man')
-                    options = ["Talk to the lost man", "Ignore the lost man"]
-                    answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False,
-                                              getback=False)
-                    # Talk to the lost man
-                    if answer == 1:
-                        print('Talk to the lost man')
-                    # Ignore the lost man
-                    elif answer == 2:
-                        print('Stay in the forest')
-                        pass
+                elif Maze.maze[Maze.y][Maze.x] == Maze.goal_naked_tree:
+                    # print('man')
+                    # options = ["Talk to the lost man", "Ignore the lost man"]
+                    # answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False,
+                    #                           getback=False)
+                    # # Talk to the lost man
+                    # if answer == 1:
+                    #     print('Talk to the lost man')
+                    # # Ignore the lost man
+                    # elif answer == 2:
+                    #     print('Stay in the forest')
+                    #     pass
+                    sc.narrator('As you walk through th woods, a unique looking tree appear in front of you.')
+                    sc.narrator('A abnormal tree, that look naked in fist sight')
+                    sc.narrator(
+                        'Despite it almost without leaves, it manege to prosper more then all the other trees in the forest')
+                    sc.player('Found it, The Naked Tree.. I can always trust the book of shadows')
+                    pl.Roni.addItem('A5')
 
         elif answer == 2:  # return
             sc.player('I should go back..')
