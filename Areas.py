@@ -1,10 +1,11 @@
-import Sentences as sc
+import Sentences as sn
 import Signs
 import TestCheck as tc
 import numpy as np
 import player as pl
 import Items as IT
 import trading_house as market
+import NPC
 
 
 class SquareQuarter:
@@ -23,32 +24,38 @@ class SquareQuarter:
         location_index = self.addresses[x_pos, y_pos]
         # hunted house
         if location_index == 0:
-            sc.narrator('This is the place')
+            sn.narrator('This is the place')
         # Random houses
         elif location_index == 1:
-            sc.narrator('You knock the door, but there is no answer')
+            sn.narrator('You knock the door, but there is no answer')
         elif location_index == 2:
-            sc.narrator('You enter into random house...')
-            sc.narrator('...while the dwelling eating supper')
-            sc.NPC('Scared kid', 'Mommy I am afraid! who is the strange woman?')
-            sc.player('I\'m sorry, wrong house')
+            sn.narrator('You enter into random house...')
+            sn.narrator('...while the dwelling eating supper')
+            sn.NPC('Scared kid', 'Mommy I am afraid! who is the strange woman?')
+            sn.player('I\'m sorry, wrong house')
         elif location_index == 3:
-            sc.narrator('As you approach the house someone shout from the window')
-            sc.NPC('dweller', 'GET OUT YOU FILTHY WITCH!')
+            sn.narrator('As you approach the house someone shout from the window')
+            sn.NPC('dweller', 'GET OUT YOU FILTHY WITCH!')
         # Black Market
 
         elif location_index == 10:
-            sc.narrator('You knock the door...')
-            sc.narrator('Someone ask you from inside')
-            sc.NPC('???', 'Who is this?')
-            pl.Roni = market.BlackMarket.enter(pl.Roni)
+            sn.narrator('You knock the door...')
+            sn.narrator('Someone ask you from inside')
+            sn.NPC('???', 'Who is this?')
+            password = input("Do you have the password? >> ")
+            if password == "MATRIMIM":
+                sn.NPC('???', 'Ok, you can enter The Black Market')
+                pl.Roni = market.BlackMarket.enter(pl.Roni)
+            else:
+                sn.NPC('???', 'Get the hell out of here!')
 
 
 class CircularQuarter:
-    def __init__(self, radios_num, angle_num):
+    def __init__(self, radios_num=7, angle_num=6):
         self.addresses = np.random.randint(1, 4, size=(radios_num, angle_num), dtype=int)
-        self.dAngle = int(360/angle_num)
+        self.dAngle = int(180/angle_num)
         self.addresses[8, 5] = 0
+        self.addresses[2, 4] = 10
 
     def angle_index(self, angle):
         angle_idx = int(angle / self.dAngle)
@@ -67,15 +74,15 @@ class CircularQuarter:
         radios_idx = rho - 1
         location_index = self.addresses[radios_idx, phi_index]
         if location_index == 0:
-            sc.narrator('This is the place')
+            sn.narrator('This is the place')
         elif location_index == 1:
-            sc.narrator('You knock the door, but there is no answer')
+            sn.narrator('You knock the door, but there is no answer')
         elif location_index == 2:
-            sc.narrator('Someone open you the door')
-            sc.NPC('Random man', 'You are not my pizza')
+            sn.narrator('Someone open you the door')
+            sn.NPC('Random man', 'You are not my pizza')
         elif location_index == 3:
-            sc.narrator('As you approach the house someone shout from the window')
-            sc.NPC('dweller', 'phh... another woman, another witch...')
+            sn.narrator('As you approach the house someone shout from the window')
+            sn.NPC('dweller', 'phh... another woman, another witch...')
 
 
 class ForestMaze:
@@ -136,25 +143,25 @@ class ForestMaze:
     def move(self, direction):
         if direction == 'w':
             if self.blockCheck(self.x, self.y-1):
-                sc.narrator("You blocked by a tree")
+                sn.narrator("You blocked by a tree")
             else:
                 self.y = self.y - 1
 
         elif direction == 's':
             if self.blockCheck(self.x, self.y+1):
-                sc.narrator("You blocked by a tree")
+                sn.narrator("You blocked by a tree")
             else:
                 self.y = self.y + 1
 
         elif direction == 'd':
             if self.blockCheck(self.x+1, self.y):
-                sc.narrator("You blocked by a tree")
+                sn.narrator("You blocked by a tree")
             else:
                 self.x = self.x + 1
 
         elif direction == 'a':
             if self.blockCheck(self.x-1, self.y):
-                sc.narrator("You blocked by a tree")
+                sn.narrator("You blocked by a tree")
             else:
                 self.x = self.x - 1
 
@@ -174,7 +181,7 @@ class Swamp:
 
     def move(self):
         while True:
-            sc.narrator('There are in the swamps a lot of trees, stones, deep mud and places with heavy fog')
+            sn.narrator('There are in the swamps a lot of trees, stones, deep mud and places with heavy fog')
             answer = tc.input_commend(self.options, "Which way is for you to go?[Enter number]", getback=False)
             if answer == 'locum tutum':
                 TheSwamp(method='spell')
@@ -186,10 +193,11 @@ class Swamp:
                         print('Found it!')
 
 
+
 def intro_town_square():
     Locations = ['Tavern', 'Church', 'Gallows', 'Quarter A', 'Quarter B', 'Apothecary', 'Unknown road']
     Signs.townSquare()
-    sc.narrator("You can see around you:")
+    sn.narrator("You can see around you:")
     # Signs.options(Locations)
     # answer = input("Where to you want to go?")
     # answer = tc.input_check(answer, Locations, "Where to you want to go?")
@@ -212,27 +220,28 @@ def intro_town_square():
 
 def Tavern():
     Signs.tavern()
-    sc.narrator('From the outside it looks uninviting, dark and dire.')
-    sc.narrator('Large and small stones and intricate stone carvings make up most of the building\'s outer structure.')
-    sc.narrator('It\'s near impossible to see through the dusty windows, but the coldness from within can be felt '
+    sn.narrator('From the outside it looks uninviting, dark and dire.')
+    sn.narrator('Large and small stones and intricate stone carvings make up most of the building\'s outer structure.')
+    sn.narrator('It\'s near impossible to see through the dusty windows, but the coldness from within can be felt '
                 'outside.')
-    sc.narrator('As you enter the tavern through the dirty, metal door,')
-    sc.narrator('you\'re welcomed by thick air and a feeling of discomfort.')
-    sc.narrator('The bartender is coughing into a dirty napkin and makes no effort to acknowledge your pressence.')
-    sc.narrator('It\'s as dire inside as it is on the outside.')
-    sc.narrator('Hardwooden beams support the upper floor and the huge, dusty lamps attached to them.')
-    sc.narrator('The walls are loaded with pictures, though the dust and cobwebs stops you from taking a closer look.')
-    sc.narrator('The tavern itself is almost completely abandoned. The few people inside could be locals, could be '
+    sn.narrator('As you enter the tavern through the dirty, metal door,')
+    sn.narrator('you\'re welcomed by thick air and a feeling of discomfort.')
+    sn.narrator('The bartender is coughing into a dirty napkin and makes no effort to acknowledge your pressence.')
+    sn.narrator('It\'s as dire inside as it is on the outside.')
+    sn.narrator('Hardwooden beams support the upper floor and the huge, dusty lamps attached to them.')
+    sn.narrator('The walls are loaded with pictures, though the dust and cobwebs stops you from taking a closer look.')
+    sn.narrator('The tavern itself is almost completely abandoned. The few people inside could be locals, could be '
                 'lost souls,')
-    sc.narrator('but whoever they are, it\'s about the clearest sign you can get, telling you you don\'t belong.')
-    sc.narrator('...')
-    sc.narrator('After few second you notice a strange looking man near the fireplace... He does not seems local...')
+    sn.narrator('but whoever they are, it\'s about the clearest sign you can get, telling you you don\'t belong.')
+    sn.narrator('...')
+    sn.narrator('After few second you notice a strange looking man near the fireplace... He does not seems local...')
     print()
     while True:
         options = ["Order from the bartender", "Approach the people", "Talk to the stranger"]
         answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False)
         if answer == 1:     # Order from the bartender
-            print('Order from the bartender')
+            NPC.Bartender.confront()
+
             pass
         elif answer == 2:     # Approach the people
             print('Approach the people')
@@ -242,19 +251,19 @@ def Tavern():
             print('Talk to the stranger')
             pass
         elif answer == 4:     # Return to the town square
-            sc.player('I should go back..')
+            sn.player('I should go back..')
             intro_town_square()
 
 
 def Church():
     Signs.church()
-    sc.narrator('Surrounded by poor looking peasants, there was the church...')
-    sc.narrator('Thick walls made of light white stone.')
-    sc.narrator('Tall middle tower with ancient cross on top of it.')
-    sc.narrator('A great gate with enormous wooden doors between two statues.')
-    sc.narrator('Well kept gardens with fragrant flowers, gorgeous trees and many bushes decorate the outside...')
-    sc.narrator('As you enter to the Main Hall, The pastor finish the pray and leave the Alter to enter the Sacristy')
-    sc.narrator('Bunch of prayer are still in the Main Hall')
+    sn.narrator('Surrounded by poor looking peasants, there was the church...')
+    sn.narrator('Thick walls made of light white stone.')
+    sn.narrator('Tall middle tower with ancient cross on top of it.')
+    sn.narrator('A great gate with enormous wooden doors between two statues.')
+    sn.narrator('Well kept gardens with fragrant flowers, gorgeous trees and many bushes decorate the outside...')
+    sn.narrator('As you enter to the Main Hall, The pastor finish the pray and leave the Alter to enter the Sacristy')
+    sn.narrator('Bunch of prayer are still in the Main Hall')
     print()
     while True:
         options = ["Alter", "Sacristy", "Stay in the Main Hall"]
@@ -267,26 +276,27 @@ def Church():
                 answer_1 = tc.input_commend(options_1, "What would you wish to do?[Enter number]", text_check=False)
                 # Holy water
                 if answer_1 == 1:
-                    print('Holy water')
+                    sn.narrator("You approach the Holy Water and take some in your bottle")
+                    pl.Roni.addItem("V1")
                     pass
                 # Nothing
                 elif answer_1 == 2:
-                    print('Nothing')
+                    sn.narrator("...Nothing happen...")
                     pass
                 # Go somewhere else
                 elif answer_1 == 3:
                     break
                 # Return to the town square
                 elif answer_1 == 4:
-                    sc.player('I should go back..')
+                    sn.player('I should go back..')
                     intro_town_square()
 
         # Sacristy
         elif answer == 2:
             print('Sacristy')
-            sc.narrator('At the moment you try to enter the Sacristy, the poster stop you and say:')
-            sc.NPC('Poster', "Greeting my child.. You have the eyes of a nun")
-            sc.NPC('Poster', "However, you don\'t look like one..")
+            sn.narrator('At the moment you try to enter the Sacristy, the poster stop you and say:')
+            sn.NPC('Poster', "Greeting my child.. You have the eyes of a nun")
+            sn.NPC('Poster', "However, you don\'t look like one..")
             pass
 
         # Stay in the Main Hall
@@ -298,30 +308,38 @@ def Church():
                 # Investigate the church
                 if answer_3 == 1:
                     print('Investigate the church')
+                    sn.narrator("As Investigate the church, you notice a pile of Wooden Stake")
+                    sn.player("This could be useful.")
+                    pl.Roni.addItem("V2")
                     pass
                 # Talk to the prayers
                 elif answer_3 == 2:
                     print('Talk to the prayers')
+                    sn.narrator("You approach the prayers")
+                    sn.player("May the lord guide us in our ways.")
+                    sn.NPC("Prayer 1", "He is. Always.")
+                    sn.NPC("Prayer 2", "You can take a Wooden Stake before you go out.. Good for lord's protection")
+                    sn.player("Thank you, I will")
                     pass
                 # Go somewhere else
                 elif answer_3 == 3:
                     break
                 # Return to the town square
                 elif answer_3 == 4:
-                    sc.player('I should go back..')
+                    sn.player('I should go back..')
                     intro_town_square()
 
         # Return to the town square
         elif answer == 4:
-            sc.player('I should go back..')
+            sn.player('I should go back..')
             intro_town_square()
 
 
 def Gallows():
     Signs.gallows()
-    sc.narrator('You\'re pulled to the sound of an excited crowd surrounding a raised wooden structure, from which an '
+    sn.narrator('You\'re pulled to the sound of an excited crowd surrounding a raised wooden structure, from which an '
                 'empty noose hangs.')
-    sc.narrator('A young woman is led across the creaky platform by a heavyset man clad in black towards the rope '
+    sn.narrator('A young woman is led across the creaky platform by a heavyset man clad in black towards the rope '
                 'swinging in the breeze.')
     while True:
         options = ["Blend in the crowd", "Approach the stage"]
@@ -335,13 +353,14 @@ def Gallows():
             print('Approach the stage')
             pass
         elif answer == 3:     # Return to the town square
-            sc.player('I should go back..')
+            sn.player('I should go back..')
             intro_town_square()
 
 
 def Quarter_A():
     Square = SquareQuarter(10, 10)
     while True:
+        print()
         options = ['Visit a house']
         answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False)
         if answer == 1:
@@ -356,7 +375,7 @@ def Quarter_A():
             Square.goto(x_loc, y_loc)
             Square.print_quarter()
         elif answer == 2:
-            sc.player('I should go back..')
+            sn.player('I should go back..')
             intro_town_square()
 
 
@@ -366,6 +385,7 @@ def Quarter_B():
     Circular = CircularQuarter(len(rho_pos), len(phi_pos))
     print('Quarter B')
     while True:
+        print()
         options = ['Visit a house']
         answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False)
         if answer == 1:
@@ -376,26 +396,26 @@ def Quarter_B():
             Circular.goto(rho_loc, phi_loc)
             Circular.print_quarter()
         elif answer == 2:
-            sc.player('I should go back..')
+            sn.player('I should go back..')
             intro_town_square()
 
 
 def Apothecary():
     Signs.apothecary()
-    sc.narrator('As you get close, you notice a wooden store and little garden')
-    sc.narrator('From the outside this store looks nice and traditional with apothecary sign on it.')
-    sc.narrator('It has been built with white pine wood and has walnut wood decorations.')
-    sc.narrator('Small, half rounded windows brighten up the house and have been added to the house in a very '
+    sn.narrator('As you get close, you notice a wooden store and little garden')
+    sn.narrator('From the outside this store looks nice and traditional with apothecary sign on it.')
+    sn.narrator('It has been built with white pine wood and has walnut wood decorations.')
+    sn.narrator('Small, half rounded windows brighten up the house and have been added to the house in a very '
                 'asymmetric way.')
-    sc.narrator('You can see long shelf full of potion behind the windows.')
-    sc.narrator('the garden looks well-kept full of variety of flora')
+    sn.narrator('You can see long shelf full of potion behind the windows.')
+    sn.narrator('the garden looks well-kept full of variety of flora')
     while True:
         options = ["Go inside the store", "Walk to the garden"]
         answer = tc.input_commend(options, "Would you like enter the store?[Enter number]", text_check=False)
         # Go inside the store
         if answer == 1:
             print('enter the store')
-            sc.narrator("Hey this is the apothecary store")
+            sn.narrator("Hey this is the apothecary store")
             while True:
                 options_2 = ["Purchase ingredients", "Look inside my bag", "Exit the store"]
                 answer_2 = tc.input_commend(options_2, "Would you like enter the store?[Enter number]",
@@ -405,16 +425,16 @@ def Apothecary():
                     # market.ApothecaryStore.showGoods()
                     # pl.Roni = market.ApothecaryStore.buy(pl.Roni)
                     pl.Roni = market.ApothecaryStore.enter(pl.Roni)
-                    sc.narrator('Anything else you wish to do?')
+                    sn.narrator('Anything else you wish to do?')
                     pass
                 # Look inside my bag
                 if answer_2 == 2:
-                    sc.narrator('You check the items in your bag')
+                    sn.narrator('You check the items in your bag')
                     pl.Roni.lookBag()
                     pass
                 # Exit the store
                 if answer_2 == 3:
-                    sc.narrator('You exit the store')
+                    sn.narrator('You exit the store')
                     break
         # Walk to the garden
         elif answer == 2:
@@ -425,24 +445,24 @@ def Apothecary():
             pass
         # Return to the town square
         elif answer == 3:
-            sc.player('I should go back..')
+            sn.player('I should go back..')
             intro_town_square()
 
 
 def Unknown_road(method='from town'):
     if method == 'from town':
-        sc.narrator('After five minutes walk you encounter a sign:')
+        sn.narrator('After five minutes walk you encounter a sign:')
         Signs.danger()
         req_item = 'URP'
         if pl.Roni.checkBag(req_item):
-            sc.narrator(f'You have {IT.itemdict[req_item]}')
-            sc.player('I can pass this now')
+            sn.narrator(f'You have {IT.itemdict[req_item]}')
+            sn.player('I can pass this now')
         else:
-            sc.player('I can\'t take this risk rigt now, I should go back...')
+            sn.player('I can\'t take this risk rigt now, I should go back...')
             intro_town_square()
-        sc.narrator('After ten more minutes you encounter a crossroad')
+        sn.narrator('After ten more minutes you encounter a crossroad')
     elif method == 'back from':
-        sc.narrator('You walk all the way back to the crossroad')
+        sn.narrator('You walk all the way back to the crossroad')
     while True:
         options = ["The Dark Forest", "The Swamps"]
         answer = tc.input_commend(options, "Where do you like to go?[Enter number]", text_check=False)
@@ -452,19 +472,19 @@ def Unknown_road(method='from town'):
             print('The Swamps')
             TheSwamp()
         elif answer == 3:   # return
-            sc.player('I should go back..')
+            sn.player('I should go back..')
             intro_town_square()
 
 
 def TheDarkForest(method='walk'):
     if method == 'walk':
-        sc.narrator('You walk slowly into the tall trees in the beginning of the forest')
-        sc.narrator('As you enter you notice a large bolder with engraving:')
-        sc.narrator('To Return: \" Revertere hic \" ')
+        sn.narrator('You walk slowly into the tall trees in the beginning of the forest')
+        sn.narrator('As you enter you notice a large bolder with engraving:')
+        sn.narrator('To Return: \" Revertere hic \" ')
     elif method == 'return spell':
-        sc.narrator('Everything around you start to spin very fast')
-        sc.narrator('and then, vanished and replaced by familiar place - The forest entrance')
-    sc.narrator('What do you want to do?')
+        sn.narrator('Everything around you start to spin very fast')
+        sn.narrator('and then, vanished and replaced by familiar place - The forest entrance')
+    sn.narrator('What do you want to do?')
     while True:
         options = ["Enter into th forest", "Return"]
         answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False, getback=False)
@@ -516,21 +536,21 @@ def TheDarkForest(method='walk'):
                     # elif answer == 2:
                     #     print('Stay in the forest')
                     #     pass
-                    sc.narrator('As you walk through th woods, a unique looking tree appear in front of you.')
-                    sc.narrator('A abnormal tree, that look naked in fist sight')
-                    sc.narrator(
+                    sn.narrator('As you walk through th woods, a unique looking tree appear in front of you.')
+                    sn.narrator('A abnormal tree, that look naked in fist sight')
+                    sn.narrator(
                         'Despite it almost without leaves, it manege to prosper more then all the other trees in the forest')
-                    sc.player('Found it, The Naked Tree.. I can always trust the book of shadows')
+                    sn.player('Found it, The Naked Tree.. I can always trust the book of shadows')
                     pl.Roni.addItem('A5')
 
         elif answer == 2:  # return
-            sc.player('I should go back..')
+            sn.player('I should go back..')
             Unknown_road(method='back from')
 
 
 def Cave():
-    sc.narrator('You enter the cave')
-    sc.narrator('You see an old witch-like lady and glooming mushrooms')
+    sn.narrator('You enter the cave')
+    sn.narrator('You see an old witch-like lady and glooming mushrooms')
     while True:
         options = ["Talk with the witch", "Examine the mushrooms", "Go back to the Forest"]
         answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False, getback=False)
@@ -544,19 +564,19 @@ def Cave():
             pass
         # Go back to the Forest
         elif answer == 3:
-            sc.player('Revertere hic...')
+            sn.player('Revertere hic...')
             TheDarkForest(method='return spell')
 
 
 def oldMansion():
-    sc.narrator('You enter an old mansion')
+    sn.narrator('You enter an old mansion')
     while True:
         options = ["Explore the outside", "Enter the mansion", "Go back to the Forest"]
         answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False, getback=False)
         # Explore the outside
         if answer == 1:
             print('Explore the outside')
-            sc.narrator('You see an old witch, a god and sleeping dragon')
+            sn.narrator('You see an old witch, a god and sleeping dragon')
             while True:
                 options = ["Talk with the old witch", "Pet the dog", "Examine the sleeping dragon", "Go back"]
                 answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False,
@@ -575,13 +595,13 @@ def oldMansion():
                     pass
                 # Go back
                 elif answer == 4:
-                    sc.player('enough with the exploration')
+                    sn.player('enough with the exploration')
                     break
             pass
         # Enter the mansion
         elif answer == 2:
             print('Enter the mansion')
-            sc.narrator('you see a picture, armor and old rune')
+            sn.narrator('you see a picture, armor and old rune')
             while True:
                 options = ["Picture", "Armor", "Old rune", "Nothing (go back)"]
                 answer = tc.input_commend(options, "What would you like to examine?[Enter number]", text_check=False,
@@ -600,20 +620,20 @@ def oldMansion():
                     pass
                 # Nothing (go back)
                 elif answer == 4:
-                    sc.player('enough with the exploration')
+                    sn.player('enough with the exploration')
                     break
             pass
         # Go back to the Forest
         elif answer == 3:
-            sc.player('Revertere hic...')
+            sn.player('Revertere hic...')
             TheDarkForest(method='return spell')
 
 
 def TheSwamp(method='walk'):
     if method == 'walk':
-        sc.narrator('Go to the swamp...')
+        sn.narrator('Go to the swamp...')
     elif method == 'spell':
-        sc.narrator('teleport to the swamp')
+        sn.narrator('teleport to the swamp')
     while True:
         options = ["Go deep into the swamp", "Go to the old hut"]
         answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False)
@@ -626,20 +646,20 @@ def TheSwamp(method='walk'):
         # Go to the old hut
         elif answer == 2:
             print('Go to the old hut')
-            sc.narrator('Inside the hut living a fisherman and his wife')
+            sn.narrator('Inside the hut living a fisherman and his wife')
             while True:
                 options = ["Talk to the fisherman", "Talk to the fisherman's wife", "Live th hut"]
                 answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False, getback=False)
                 # Talk to the fisherman
                 if answer == 1:
-                    sc.NPC('Fisherman', 'Im am a fisherman')
+                    sn.NPC('Fisherman', 'Im am a fisherman')
                 elif answer == 2:
-                    sc.NPC('Fisherman\'s wife', 'Im am a wife')
+                    sn.NPC('Fisherman\'s wife', 'Im am a wife')
                 elif answer == 3:
-                    sc.narrator('You live the hut')
+                    sn.narrator('You live the hut')
                     break
             pass
         # Return to the town square
         elif answer == 3:
-            sc.player('I should go back..')
+            sn.player('I should go back..')
             Unknown_road(method='back from')

@@ -1,0 +1,102 @@
+import Sentences as sn
+import TestCheck as tc
+import player as pl
+import Items as IT
+
+
+class TheBartender():
+    def __init__(self):
+        self.drinks = ['beer', 'wine']
+        self.codewords = ['vampire kiss', 'black jin', 'red n black liqueur', 'mudbeer']
+        self.name = "The Bartender"
+
+    def speak(self, sentence):
+        sn.NPC(self.name, sentence)
+
+    def order(self):
+        while True:
+            order_ = input("Your order >> ")
+            order_ = order_.lower()
+
+            # Drink
+            if order_ in self.drinks:
+                self.speak("Here you go.")
+                sn.player("Thank you.")
+
+            # Nothing
+            elif order_ not in self.codewords:
+                self.speak("We do not serve it here")
+
+            # vampire kiss
+            elif order_ == self.codewords[0]:
+                sn.narrator("The bartender looked behind you to varify nobody listen.")
+                self.speak("I see...")
+                self.speak("You ask to do a dangerous thing... ")
+                sn.narrator("The bartender say it while pouring you a redish drink.")
+                self.speak("Rumors says that the vampire hideout locate in Quarter B.")
+                self.speak("SECTION:    [-sqrt(3)/2].")
+                self.speak("AREA:       [4.5*PI].")
+                sn.player("Thanks for the drink.")
+
+            # black jin
+            elif order_ == self.codewords[1]:
+                sn.narrator("The bartender looked behind you to varify nobody listen.")
+                self.speak("I was in the black market... like every merchant.")
+                self.speak("To get in you need to know the password: MATRIMIM.")
+                sn.narrator("The bartender say it while pouring you a chaser of dark jin.")
+                sn.player("Thanks for the drink.")
+
+            # red & black liqueur
+            elif order_ == self.codewords[2]:
+                sn.narrator("The bartender looked behind you to varify nobody listen.")
+                self.speak("So they sent you... Makes sense...")
+                self.speak("Listen closely because wat Im about to say ain't a rumor.")
+                self.speak("The executor at the gallows its human. He is a very powerful demon.")
+                self.speak("Go to the gallows to figure out.")
+                pl.Roni.addItem("GC")
+                pl.Roni.addItem("URP")
+                sn.player("I will investigate it.")
+
+            # mudbeer
+            elif order_ == self.codewords[3]:
+                sn.narrator("The bartender looked behind you to varify nobody listen.")
+                self.speak("You again... I can work with that...")
+                self.speak("Have you ever been in The Swamps?")
+                sn.player("No... Why?")
+                self.speak("Today is your day... But not in the good way.")
+                self.speak("There a rumors about demos that came to hunt the young woman and man of Eastwood")
+                self.speak("Little I know about their powers, but their origin is in The Swamps")
+                sn.player("Ok. Anything I should know about The Swamps?")
+                self.speak("It is not shape like The Dark Forest, there is no map the will help you.")
+                self.speak("There is a fisherman that live in there, you should investigate him")
+                pl.Roni.addItem("URP")
+                sn.player("Got it, thanks for the information")
+
+
+            self.speak("Something else?")
+            answer = tc.input_commend(['y', 'n'], '[y/n]', show_options=False, getback=False)
+            if answer == 'y':
+                pass
+            if answer == 'n':
+                break
+
+    def confront(self):
+        self.speak("Greeting, What would you like to order?")
+        # answer = input()
+        self.order()
+
+
+Bartender = TheBartender()
+
+def main():
+    Ned = TheBartender()
+    Ned.confront()
+    # Ned.order('11232')
+    # Ned.order('aaa')
+    # Ned.order('bbb')
+
+
+
+
+if __name__ == '__main__':
+    main()

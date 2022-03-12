@@ -29,7 +29,8 @@ itemdict = {
     "M3": "Death Earthball",
     "M4": "Coral Widow",
     "M5": "Cloudy Brittlegill",
-    "URP": "Unknown-road-pass"
+    "URP": "Unknown-road-pass",
+    "GC": "Gallows-tip"
 }
 
 

@@ -21,7 +21,6 @@ class Shop:
             index = index + 1
         print(f'{index}. Nothing')
 
-
     def buy(self, playerObj):
         ItemsList = list(self.items.values())
         ItemsList.append(0)
@@ -37,12 +36,12 @@ class Shop:
                 isShop = False
                 break
             # print("Check OOS")
-            print(selected_item_index)
-            print(ItemsList[selected_item_index])
-            print(self.out_of_stock)
+            # print(selected_item_index)
+            # print(ItemsList[selected_item_index])
+            # print(self.out_of_stock)
 
             item_id = list(self.items.keys())[list(self.items.values()).index(ItemsList[selected_item_index])]
-            print(item_id)
+            # print(item_id)
             if item_id in self.out_of_stock:
 
                 # Dried rhubarb leaf | Bay leaves | Rose Petals | Catnip
@@ -63,6 +62,7 @@ class Shop:
                     sc.NPC("Apothecary", f"If you want, you need to take {ItemsList[selected_item_index]} from them")
                     sc.player("I see.. you know where can I find them?")
                     sc.NPC("Apothecary", "No. But all the rumors cross the bartender ears.")
+                    sc.NPC("Apothecary", "Order the 'vampire kiss', and he would help you")
                     sc.player("Thanks for the tip. I should look into it.")
 
                 # Clover blossom
