@@ -36,6 +36,7 @@ class TheBartender():
                 self.speak("Rumors says that the vampire hideout locate in Quarter B.")
                 self.speak("SECTION:    [-sqrt(3)/2].")
                 self.speak("AREA:       [4.5*PI].")
+                sn.player("I cant just walk there without protection. I need to check the Book of Shadows")
                 sn.player("Thanks for the drink.")
 
             # black jin
@@ -54,7 +55,6 @@ class TheBartender():
                 self.speak("The executor at the gallows its human. He is a very powerful demon.")
                 self.speak("Go to the gallows to figure out.")
                 pl.Roni.addItem("GC")
-                pl.Roni.addItem("URP")
                 sn.player("I will investigate it.")
 
             # mudbeer

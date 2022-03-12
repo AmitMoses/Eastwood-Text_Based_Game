@@ -42,8 +42,8 @@ class SquareQuarter:
             sn.narrator('You knock the door...')
             sn.narrator('Someone ask you from inside')
             sn.NPC('???', 'Who is this?')
-            password = input("Do you have the password? >> ")
-            if password == "MATRIMIM":
+            password = input("Do you have the password? >> ").lower()
+            if password == "matrimim":
                 sn.NPC('???', 'Ok, you can enter The Black Market')
                 pl.Roni = market.BlackMarket.enter(pl.Roni)
             else:
@@ -193,7 +193,6 @@ class Swamp:
                         print('Found it!')
 
 
-
 def intro_town_square():
     Locations = ['Tavern', 'Church', 'Gallows', 'Quarter A', 'Quarter B', 'Apothecary', 'Unknown road']
     Signs.townSquare()
@@ -237,20 +236,28 @@ def Tavern():
     sn.narrator('After few second you notice a strange looking man near the fireplace... He does not seems local...')
     print()
     while True:
-        options = ["Order from the bartender", "Approach the people", "Talk to the stranger"]
+        options = ["Order from the bartender", "Seat and eavesdrop", "Talk to the stranger"]
         answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False)
-        if answer == 1:     # Order from the bartender
+        # Order from the bartender
+        if answer == 1:
             NPC.Bartender.confront()
-
             pass
-        elif answer == 2:     # Approach the people
-            print('Approach the people')
-            pl.Roni.addItem(pl.Roni.KeyItems[0])
+        # Seat and eavesdrop
+        elif answer == 2:
+            print('Seat and eavesdrop')
+            sn.narrator("You decided to sit down, while the drunk people tell tales...")
+            sn.NPC("Drunk 1", "I tell you... you can buy rare and illegal stuff in there.")
+            sn.NPC("Drunk 2", "You did not been there, you dont have the guts.")
+            sn.NPC("Drunk 1", "So how do I now that it is locate on Quarter A, at: x=X(1), y=X(2).")
+            sn.NPC("Drunk 2", "You are full of bullshit.")
+            sn.player("I heard enough.")
             pass
-        elif answer == 3:     # Talk to the stranger
+        # Talk to the stranger
+        elif answer == 3:
             print('Talk to the stranger')
             pass
-        elif answer == 4:     # Return to the town square
+        # Return to the town square
+        elif answer == 4:
             sn.player('I should go back..')
             intro_town_square()
 
@@ -347,6 +354,13 @@ def Gallows():
         # Blend in the crowd
         if answer == 1:
             print('Blend in the crowd')
+            if pl.Roni.checkBag("GC"):
+                sn.NPC("Peasant 1", "I heard rumors the the executor isn't what you think.")
+                sn.NPC("Peasant 1", "You can find the true in the Old Mansion, at the end of The Dark forest.")
+                pl.Roni.addItem("URP")
+            else:
+                sn.NPC("Peasant 1", "Poor woman...")
+                sn.NPC("Peasant 2", "Do not feel sorry for her, she is a witch!")
             pass
         # Approach the stage
         elif answer == 2:
@@ -369,8 +383,8 @@ def Quarter_A():
             print('choose house address:')
             x_pos = list(range(1, 11))      # 10 options,from 1 to 10
             y_pos = list(range(1, 11))      # 10 options,from 1 to 10
-            x_loc = int(tc.input_commend(x_pos, 'enter X coordinate:', show_options=False, text_check=True))
-            y_loc = int(tc.input_commend(y_pos, 'enter Y coordinate:', show_options=False, text_check=True))
+            x_loc = int(tc.input_commend(x_pos, 'enter x coordinate:', show_options=False, text_check=True))
+            y_loc = int(tc.input_commend(y_pos, 'enter y coordinate:', show_options=False, text_check=True))
             print(x_loc, y_loc)
             Square.goto(x_loc, y_loc)
             Square.print_quarter()
@@ -417,7 +431,7 @@ def Apothecary():
             print('enter the store')
             sn.narrator("Hey this is the apothecary store")
             while True:
-                options_2 = ["Purchase ingredients", "Look inside my bag", "Exit the store"]
+                options_2 = ["Purchase ingredients", "Look inside my bag", "Mix potion", "Exit the store"]
                 answer_2 = tc.input_commend(options_2, "Would you like enter the store?[Enter number]",
                                             text_check=False, getback=False)
                 # Purchase ingredients
@@ -432,8 +446,15 @@ def Apothecary():
                     sn.narrator('You check the items in your bag')
                     pl.Roni.lookBag()
                     pass
-                # Exit the store
                 if answer_2 == 3:
+                    print('Mix potion')
+                    sn.narrator("You need to choose the potion you would like to mix.")
+                    sn.narrator("The potion recipe is documented in the Book of Shadows")
+                    choose_potion = input("What is the title of the page in th Book of Shadows? >>").lower()
+                    pl.Roni.makePotion(choose_potion)
+                    pass
+                # Exit the store
+                if answer_2 == 4:
                     sn.narrator('You exit the store')
                     break
         # Walk to the garden
@@ -648,13 +669,28 @@ def TheSwamp(method='walk'):
             print('Go to the old hut')
             sn.narrator('Inside the hut living a fisherman and his wife')
             while True:
-                options = ["Talk to the fisherman", "Talk to the fisherman's wife", "Live th hut"]
+                options = ["Talk to the fisherman", "Talk to the fisherman's wife", "Live the hut"]
                 answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False, getback=False)
                 # Talk to the fisherman
                 if answer == 1:
                     sn.NPC('Fisherman', 'Im am a fisherman')
+                    sn.NPC('Fisherman', 'She always call me... the demon... I am so afraid...')
+                    sn.NPC('Fisherman', "She seeks out powerful men who become helpless against her magic then feeds"
+                                        " on their testosterone with her razor-sharp tongue")
+                    sn.player("She is a witch renounces all human emotion and makes a pact with darkness to protect "
+                              "herself from heartbreak")
+                    sn.player("Succubus")
+                    sn.NPC('Fisherman', "Can you destroy her?")
+                    sn.player("Yes, but I need thing for the spell to work. I need to check the Book of Shadows")
                 elif answer == 2:
-                    sn.NPC('Fisherman\'s wife', 'Im am a wife')
+                    sn.narrator("The women look very old, more like the Fisherman\'s mom the wife")
+                    sn.NPC('Fisherman\'s wife', 'Im am young, but... but...')
+                    sn.NPC("Fisherman's wife", "The Demon! HE stole my life force to regain his youth!")
+                    sn.NPC("Fisherman's wife", "He was old, and after what he done to me... no more...")
+                    sn.player("I read about him... Javna.")
+                    sn.player("I need to check the Book of Shadows.")
+                    sn.NPC('Fisherman\'s wife', 'Help me please.')
+                    sn.player("Dont worry, I will do whatever I can.")
                 elif answer == 3:
                     sn.narrator('You live the hut')
                     break

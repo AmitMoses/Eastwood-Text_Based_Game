@@ -30,16 +30,16 @@ itemdict = {
     "M4": "Coral Widow",
     "M5": "Cloudy Brittlegill",
     "URP": "Unknown-road-pass",
-    "GC": "Gallows-tip"
+    "GC": "Gallows-tip",
+    "P1": "banishing a ghost",
+    "P2": "demon of anarchy",
+    "P3": "charm of love"
 }
 
-
-
-
 PotionRecipes_dict = {
-    "G": ['G1', 'G2', 'G3', 'G4', 'G5'],
-    "A": ['A1', 'A2', 'A3', 'A4', 'A5'],
-    "L": ['L1', 'L2', 'L3', 'L5', 'L5', 'L6', 'L7', 'L8', 'L9', 'A2']
+    "banishing a ghost": ['G1', 'G2', 'G3', 'G4', 'G5'],
+    "demon of anarchy": ['A1', 'A2', 'A3', 'A4', 'A5'],
+    "charm of love": ['L1', 'L2', 'L3', 'L5', 'L5', 'L6', 'L7', 'L8', 'L9', 'A2']
 }
 
 

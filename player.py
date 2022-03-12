@@ -1,11 +1,19 @@
 import Sentences as sc
 import Items as IT
 
+
+# "G1": "Pomegranate seeds",
+#     "G2": "Comfry root",
+#     "G3": "Clematis seed",
+#     "G4": "Dried rhubarb leaf",
+#     "G5": "Blood meal",
+
+
 class Player:
     def __init__(self):
         self.HP = 100
         # self.bag = [IT.itemdict["URP"]]
-        self.bag = []
+        self.bag = ["Unknown-road-pass"]
         self.potion = []
         self.PotionRecipes = IT.PotionRecipes_dict
         self.KeyItems = ['key_1', 'key_2', 'key_3']
@@ -52,11 +60,12 @@ class Player:
         else:
             for ing in Ingredients:
                 self.bag.remove(IT.itemdict[ing])
-            self.potion.append(Recipe)
-            sc.narrator(f"you just make a {Recipe}!")
+            self.bag.append(Recipe)
+            sc.narrator(f"you just make a {Recipe} potion!")
 
 
 Roni = Player()
+
 
 def main():
     roni = Player()
