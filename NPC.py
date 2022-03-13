@@ -1,13 +1,12 @@
 import Sentences as sn
 import TestCheck as tc
 import player as pl
-import Items as IT
 
 
-class TheBartender():
+class TheBartender:
     def __init__(self):
         self.drinks = ['beer', 'wine']
-        self.codewords = ['vampire kiss', 'black jin', 'red n black liqueur', 'mudbeer']
+        self.codewords = ['vampire kiss', 'black jin', 'red n black liqueur', 'mudbeer', 'honey whisky']
         self.name = "The Bartender"
 
     def speak(self, sentence):
@@ -35,7 +34,7 @@ class TheBartender():
                 sn.narrator("The bartender say it while pouring you a redish drink.")
                 self.speak("Rumors says that the vampire hideout locate in Quarter B.")
                 self.speak("SECTION:    [-sqrt(3)/2].")
-                self.speak("AREA:       [4.5*PI].")
+                self.speak("AREA:       [8*PI].")
                 sn.player("I cant just walk there without protection. I need to check the Book of Shadows")
                 sn.player("Thanks for the drink.")
 
@@ -72,6 +71,22 @@ class TheBartender():
                 pl.Roni.addItem("URP")
                 sn.player("Got it, thanks for the information")
 
+            # honey whisky
+            elif order_ == self.codewords[4]:
+                sn.narrator("Suddenly, the bartender filled with joy. He look you directly in the eye")
+                self.speak("Ha Ha! My favorite. It would be my honor to pour you this special one")
+                sn.narrator("The bartender put a littel glass in front of you")
+                sn.narrator("and filling it with the honey whisky")
+                self.speak("You know... I should thank you... No. Whole Eastwood should!")
+                self.speak("Maybe there is something I can help you with... Especially because tomorrow")
+                sn.player("What happening tomorrow?")
+                self.speak("You don't know already? really?.... So I will not spoil you")
+                sn.player("Spoil what?")
+                self.speak("Nevermind, listen, you should check your book, search the \"Charm of Love\"")
+                self.speak("Take this, maybe it can help you find all the ingredient.")
+                pl.Roni.addItem("URP")
+                self.speak("Trust me, its all I can give you")
+                sn.player("Got it, thank you, I will")
 
             self.speak("Something else?")
             answer = tc.input_commend(['y', 'n'], '[y/n]', show_options=False, getback=False)

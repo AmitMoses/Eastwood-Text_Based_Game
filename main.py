@@ -7,7 +7,7 @@ import player as pl
 
 def intro():
     sn.narrator('Hey Roni')
-    sn.narrator('You woke up alone in middle of unfamiliar road...')
+    sn.narrator('You woke up alone in middle of familiar road...')
     sn.narrator('The sky are cloudy and everything look grey...')
     sn.narrator('You notice that not far from you there is an old sign...')
     print()

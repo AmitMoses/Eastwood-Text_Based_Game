@@ -11,8 +11,9 @@ import NPC
 class SquareQuarter:
     def __init__(self, max_x, max_y):
         self.addresses = np.random.randint(1, 4, size=(max_x, max_y), dtype=int)
-        self.addresses[6, 8] = 0
-        self.addresses[1, 4] = 10
+        self.addresses[6, 8] = 0  # hunted house
+        self.addresses[1, 4] = 10 # black market
+
 
     def get_location(self, x_pos, y_pos):
         return self.addresses[x_pos, y_pos]
@@ -25,6 +26,7 @@ class SquareQuarter:
         # hunted house
         if location_index == 0:
             sn.narrator('This is the place')
+            HuntedHouse()
         # Random houses
         elif location_index == 1:
             sn.narrator('You knock the door, but there is no answer')
@@ -54,10 +56,10 @@ class CircularQuarter:
     def __init__(self, radios_num=7, angle_num=6):
         self.addresses = np.random.randint(1, 4, size=(radios_num, angle_num), dtype=int)
         self.dAngle = int(180/angle_num)
-        self.addresses[8, 5] = 0
-        self.addresses[2, 4] = 10
+        self.addresses[3, 4] = 10   # Vampire's dan
 
     def angle_index(self, angle):
+        angle = angle-30
         angle_idx = int(angle / self.dAngle)
         return angle_idx
 
@@ -83,6 +85,8 @@ class CircularQuarter:
         elif location_index == 3:
             sn.narrator('As you approach the house someone shout from the window')
             sn.NPC('dweller', 'phh... another woman, another witch...')
+        elif location_index == 10:
+            VampireDen()
 
 
 class ForestMaze:
@@ -175,14 +179,14 @@ class ForestMaze:
 
 class Swamp:
     def __init__(self):
-        self.correct_path = ['stone',  'tree', 'mud']
-        self.options = ['Stone', 'Tree', 'Fog', 'Mud', 'Locum Tutum']
+        self.correct_path = ['stone',  'tree', 'stone', 'stone', 'mist']
+        self.options = ['Stone', 'Tree', 'Mist', 'Mud', 'Locum Tutum']
         self.path = []
 
     def move(self):
         while True:
-            sn.narrator('There are in the swamps a lot of trees, stones, deep mud and places with heavy fog')
-            answer = tc.input_commend(self.options, "Which way is for you to go?[Enter number]", getback=False)
+            sn.narrator('There are in the swamps a lot of trees, stones, deep mud and places with heavy mist')
+            answer = tc.input_commend(self.options, "Which way is for you to go?[Tree/Stone/Mud/Mist]", getback=False)
             if answer == 'locum tutum':
                 TheSwamp(method='spell')
             else:
@@ -191,30 +195,53 @@ class Swamp:
                 if len(self.path) >= len(self.correct_path):
                     if self.path[-len(self.correct_path)::] == self.correct_path:
                         print('Found it!')
+                        sn.narrator("The fog start to disappear... you notice two figures in ahead of you")
+                        winJavna = pl.Roni.checkBag("S1")
+                        winSuccubus = pl.Roni.checkBag("S2")
+
+                        # lose both
+                        if (not winJavna) or (not winSuccubus):
+                            sn.player("Javna and Succubus, together, there is no duet now")
+                            sn.player("In order to deal with this situation, I must banish them both.")
+                            sn.player("Unfortunately, I did not came prepared.. I must run for now")
+                            TheSwamp(method='spell')
+                            pass
+
+                        elif winJavna and winSuccubus:
+                            sn.narrator("you approach both of them and banish them")
+                            print("after you do, the fishermen and his wife came to thank you and give you information")
+                            pass
 
 
 def intro_town_square():
     Locations = ['Tavern', 'Church', 'Gallows', 'Quarter A', 'Quarter B', 'Apothecary', 'Unknown road']
     Signs.townSquare()
-    sn.narrator("You can see around you:")
-    # Signs.options(Locations)
-    # answer = input("Where to you want to go?")
-    # answer = tc.input_check(answer, Locations, "Where to you want to go?")
-    answer = tc.input_commend(Locations, "Where to you want to go?", getback=False)
-    if answer == 'tavern':
-        Tavern()
-    elif answer == 'church':
-        Church()
-    elif answer == 'gallows':
-        Gallows()
-    elif answer == 'quarter a':
-        Quarter_A()
-    elif answer == 'quarter b':
-        Quarter_B()
-    elif answer == 'apothecary':
-        Apothecary()
-    elif answer == 'unknown road':
-        Unknown_road()
+
+    if pl.Roni.checkBag("P3"):
+        print("final information")
+        print("END")
+        Signs.end()
+        pass
+    else:
+        sn.narrator("You can see around you the different parts of the town.")
+        # Signs.options(Locations)
+        # answer = input("Where to you want to go?")
+        # answer = tc.input_check(answer, Locations, "Where to you want to go?")
+        answer = tc.input_commend(Locations, "Where to you want to go?", getback=False, show_options=False)
+        if answer == 'tavern':
+            Tavern()
+        elif answer == 'church':
+            Church()
+        elif answer == 'gallows':
+            Gallows()
+        elif answer == 'quarter a':
+            Quarter_A()
+        elif answer == 'quarter b':
+            Quarter_B()
+        elif answer == 'apothecary':
+            Apothecary()
+        elif answer == 'unknown road':
+            Unknown_road()
 
 
 def Tavern():
@@ -301,10 +328,16 @@ def Church():
         # Sacristy
         elif answer == 2:
             print('Sacristy')
-            sn.narrator('At the moment you try to enter the Sacristy, the poster stop you and say:')
-            sn.NPC('Poster', "Greeting my child.. You have the eyes of a nun")
-            sn.NPC('Poster', "However, you don\'t look like one..")
-            pass
+            if pl.Roni.checkBag("P2"):
+                print("kill poster")
+                print("prayes see what happen tnd thanking you")
+                print("prayers gives you information")
+                pass
+            else:
+                sn.narrator('At the moment you try to enter the Sacristy, the poster stop you and say:')
+                sn.NPC('Poster', "Greeting my child.. You have the eyes of a nun.")
+                sn.NPC('Poster', "However, you don\'t look like one..")
+                pass
 
         # Stay in the Main Hall
         elif answer == 3:
@@ -351,6 +384,7 @@ def Gallows():
     while True:
         options = ["Blend in the crowd", "Approach the stage"]
         answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False)
+
         # Blend in the crowd
         if answer == 1:
             print('Blend in the crowd')
@@ -362,10 +396,19 @@ def Gallows():
                 sn.NPC("Peasant 1", "Poor woman...")
                 sn.NPC("Peasant 2", "Do not feel sorry for her, she is a witch!")
             pass
+
         # Approach the stage
         elif answer == 2:
             print('Approach the stage')
-            pass
+            if pl.Roni.checkBag("B1"):
+                print("kill demon")
+                print("save witch from death")
+                print("witch thank you and gives you information")
+                pass
+            else:
+                print("The executor stop you")
+                pass
+
         elif answer == 3:     # Return to the town square
             sn.player('I should go back..')
             intro_town_square()
@@ -410,8 +453,8 @@ def Quarter_B():
                 "like a bumpkin.")
     sn.narrator("As you get further away from the main square you see more typical normal-sized houses,"
                 " but all of them are well taken care of.")
-    phi_pos = list(range(0, 360, 45))  # 10 options,from 1 to 10
-    rho_pos = list(range(1, 10))  # 10 options,from 1 to 10
+    phi_pos = list(range(30, 181, 30))  # 6 options,from 0 to 180
+    rho_pos = list(range(1, 8))  # 7 options,from 1 to 7
     Circular = CircularQuarter(len(rho_pos), len(phi_pos))
     print('Quarter B')
     while True:
@@ -462,8 +505,8 @@ def Apothecary():
                     sn.narrator('You check the items in your bag')
                     pl.Roni.lookBag()
                     pass
+                # Mix potion
                 if answer_2 == 3:
-                    print('Mix potion')
                     sn.narrator("You need to choose the potion you would like to mix.")
                     sn.narrator("The potion recipe is documented in the Book of Shadows")
                     choose_potion = input("What is the title of the page in th Book of Shadows? >>").lower()
@@ -719,7 +762,33 @@ def oldMansion():
                         sn.NPC("Old Witch", "correct mushroom")
                         pl.Roni.addItem("B1")
                     elif pl.Roni.checkBag("GC"):
-                        sn.NPC("Old Witch", "Balthazor, give me mushroom")
+                        sn.NPC("Old Witch", "Belthazor, give me mushroom")
+
+                        sn.narrator("You approach to the old witch, you can tell she notice you but try to ignore.")
+                        sn.player("Hey, can you help me? I had got some questions.")
+                        sn.NPC("Old witch", "...")
+                        sn.player("Please, it to help another young witch today, and possibly more in the future.")
+                        sn.NPC("Old witch", "What? What do you want?")
+                        sn.player("I cam from Eastwood, I want the gallows today, and something smells bad over there")
+                        sn.player("Additionally, I got a tip that I can find answer here.")
+                        sn.NPC("Old witch", "... The gallows... The executor... It was all my fault... "
+                                            "and I cand do nothing")
+                        sn.player("Tell me what happened.")
+                        sn.NPC("Old witch", "I was young and stupid, this was a mistake."
+                                            " I summon him, to destroyed my enemies")
+                        sn.NPC("The demonic soldier of Fortune... Belthazor")
+                        sn.player("I thing he is mention in the Book of Shadows")
+                        sn.narrator("I tries to vanquished him, but I lack of one ingredient")
+                        sn.player("Why cant you get it?")
+                        sn.NPC("Old witch", "He made a deal with the blind witch, my former enemies "
+                                            "I tried to destroyed")
+                        sn.NPC("Old witch", "She guard the cave in The Dark Forest prevent me to enter "
+                                            "and get the mushroom.")
+                        sn.player("I can help you, tell me what mushroom you need and I will steal it from her.")
+                        sn.NPC("Old witch", "You would do it? ... Ok. If you can bring me back 'Hairy Grisette' "
+                                            "I can finish the potion")
+                        sn.NPC("Old witch", "With that, you can vanquish Belthazor and make it stop")
+                        sn.NPC("I will do it. Trust me")
                     else:
                         sn.NPC("old witch", "...")
 
@@ -775,8 +844,8 @@ def TheSwamp(method='walk'):
     sn.narrator("The mud pulls at your feet as you approach the swamp, every step is taxing.")
     sn.narrator("As you push on you see rotten planks forming a small hut on stakes, above the murky waters.")
     sn.narrator("At the balcony sits an old man with a fishing pole,")
-    sn.narrator("in the lamplight reflected from the swamp one could think he’s made from the same mildewed wood as the house and the rod.")
-    sn.narrator("You shudder to think what he may catch in these waters, thankfully the basket next to him sits empty.")
+    sn.narrator("in the lamplight reflected from the swamp one could think he’s made from the same mildewed wood as "
+                "the house and the rod.")
     sn.narrator("You shudder to think what he may catch in these waters, thankfully the basket next to him sits empty.")
 
     if method == 'walk':
@@ -827,3 +896,62 @@ def TheSwamp(method='walk'):
         elif answer == 3:
             sn.player('I should go back..')
             Unknown_road(method='back from')
+
+
+def VampireDen():
+    if pl.Roni.checkBag("V1"):
+        sn.narrator("You rub a few drops of Holy Water on your palm and gingerly reach for the doorknob, "
+                    "it opens with ease. ")
+        sn.narrator("As you enter the abandoned house your mind is instantly jarred by the unexpected size,")
+        sn.narrator("the floor is big and lavish and exquisite red roses decorate the long table at the "
+                    "center.")
+        sn.narrator("As you gape at the sheer size of it all your eyes finally focus on 6 pale bedraggled "
+                    "figures seated at the table,")
+        sn.narrator("recoiling slightly from your presence, and a regal looking woman lounging at their head.")
+        sn.NPC("Regal looking woman", "Go ahead")
+        sn.narrator("she tells you in an amused manner")
+        sn.NPC("Regal looking woman", "Say it.")
+        sn.player("It's smaller on the outside")
+        sn.NPC("Regal looking woman", "Ok, that's a first. Now - what brings you to Our castle, witch?")
+
+        while True:
+            options = ["I came for Blood meal", "Nothing, I should go back"]
+            answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False, getback=False)
+
+            # I came for Blood meal
+            if answer == 1:
+                if pl.Roni.checkBag("V2"):
+                    sn.player("I came for the Blood meal, bring me to your queen")
+                    sn.NPC("Regal looking woman", "Only if you wish death! The holy water can only repelled us")
+                    sn.player("VAMPIRE QUEEN! I CAM FOR YOU! SHOW YOURSELF")
+                    sn.narrator("you decided to ignore the women and call the queen loudly")
+                    sn.narrator("Suddenly, enormous bat came from the ceiling, transform to a woman and "
+                                "stand in front of you")
+                    sn.NPC("The Vampire Queen", "Here I am. What do you want?")
+                    sn.narrator("you pull out your wooden stake and kill her.")
+                    pl.Roni.addItem("G5")
+                    sn.player("Thank for the blood meal")
+                    break
+                else:
+                    sn.player("I came for the Blood meal")
+                    sn.NPC("Regal looking woman", "Ha Ha... child, you will have to take it directly from "
+                                                  "the vampire queen")
+                    sn.player("The vampire queen? I can not deal with her right now, holy water isn't enough")
+                    break
+            if answer == 2:
+                sn.player("Nothing, I should go back")
+                break
+    else:
+        sn.narrator("Steeling yourself for whatever lurks inside, you reach for the doorknob.")
+        sn.narrator("At that moment dozens of phantoms assault you - until you let go of the door. ")
+        sn.narrator("Nothing to do but turn back and come back better prepared. ")
+
+
+def HuntedHouse():
+    sn.narrator("The door is open, so you let yourself in...")
+
+    if pl.Roni.checkBag("P1"):
+        print("Thank you, I will give you this information")
+        pass
+    else:
+        pass
