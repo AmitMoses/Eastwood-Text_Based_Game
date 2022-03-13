@@ -372,6 +372,14 @@ def Gallows():
 
 
 def Quarter_A():
+    sn.narrator("The smell hits you like a fist.")
+    sn.narrator("But what could you expect with so many houses cloistered shoulder to shoulder, ")
+    sn.narrator("as if their neighbors are the only thing keeping them upright in this boxed quarter.")
+    sn.narrator("You’d like to slow your pace and make sure you don’t step in any weirdly coloured puddles of what is surely water,")
+    sn.narrator("but you’d rather not draw attention to yourself.")
+    sn.narrator("With your head held relatively high, you take your first steps through the puddles of what is definitely NOT water.")
+
+
     Square = SquareQuarter(10, 10)
     while True:
         print()
@@ -394,6 +402,14 @@ def Quarter_A():
 
 
 def Quarter_B():
+    sn.narrator("Round as the coins flowing through it, this neighborhood is home to merchants, "
+                "craftsmen and many other respected citizens.")
+    sn.narrator("This is a place of commerce, with paths wide enough to accommodate two wagons and imposing houses "
+                "surrounded by lush gardens.")
+    sn.narrator("You find yourself gawking at a nearby mansion and quickly lower your eyes to avoid looking "
+                "like a bumpkin.")
+    sn.narrator("As you get further away from the main square you see more typical normal-sized houses,"
+                " but all of them are well taken care of.")
     phi_pos = list(range(0, 360, 45))  # 10 options,from 1 to 10
     rho_pos = list(range(1, 10))  # 10 options,from 1 to 10
     Circular = CircularQuarter(len(rho_pos), len(phi_pos))
@@ -498,6 +514,12 @@ def Unknown_road(method='from town'):
 
 
 def TheDarkForest(method='walk'):
+    sn.narrator("Massive ancient trees watch as you enter the dark forest.")
+    sn.narrator("The thick trees blot out the sun and the smell of dead plants is thick in the air.")
+    sn.narrator("The wind picks up, rustling the leaves and putting your hairs on ends.")
+    sn.narrator("You’ve braved forests before, but did the wind really just pick up?")
+
+
     if method == 'walk':
         sn.narrator('You walk slowly into the tall trees in the beginning of the forest')
         sn.narrator('As you enter you notice a large bolder with engraving:')
@@ -673,6 +695,13 @@ def Cave():
 
 def oldMansion():
     sn.narrator('You enter an old mansion')
+    sn.narrator("A focal point of local legends, what seems to be a deserted old mansion looms ahead.")
+    sn.narrator("The mansion is definitely in a state of disrepair - the rusty iron gate hangs by a single hinge,")
+    sn.narrator("tall weeds over what must have been a garden,")
+    sn.narrator(" plants growing over the brick walls and covering the windows, even unwashed… scorch marks?")
+    sn.narrator("You could swear you caught a glimpse of something in one of the windows…")
+
+
     while True:
         options = ["Explore the outside", "Enter the mansion", "Go back to the Forest"]
         answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False, getback=False)
@@ -743,6 +772,13 @@ def oldMansion():
 
 
 def TheSwamp(method='walk'):
+    sn.narrator("The mud pulls at your feet as you approach the swamp, every step is taxing.")
+    sn.narrator("As you push on you see rotten planks forming a small hut on stakes, above the murky waters.")
+    sn.narrator("At the balcony sits an old man with a fishing pole,")
+    sn.narrator("in the lamplight reflected from the swamp one could think he’s made from the same mildewed wood as the house and the rod.")
+    sn.narrator("You shudder to think what he may catch in these waters, thankfully the basket next to him sits empty.")
+    sn.narrator("You shudder to think what he may catch in these waters, thankfully the basket next to him sits empty.")
+
     if method == 'walk':
         sn.narrator('Go to the swamp...')
     elif method == 'spell':
