@@ -532,7 +532,8 @@ def TheDarkForest(method='walk'):
                         pass
                 # Cave
                 elif Maze.maze[Maze.y][Maze.x] == Maze.goal_cave:
-                    print('cave')
+                    sn.narrator("In the middle of the forest, between two massive tree, a cave revealed to your eyes")
+                    sn.narrator("The cave entrance is around ten feet tall, so you can go inside easly.")
                     options = ["Go inside the Cave", "Stay in the forest"]
                     answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False,
                                               getback=False)
@@ -546,17 +547,6 @@ def TheDarkForest(method='walk'):
                         pass
                 # Lost Man
                 elif Maze.maze[Maze.y][Maze.x] == Maze.goal_naked_tree:
-                    # print('man')
-                    # options = ["Talk to the lost man", "Ignore the lost man"]
-                    # answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False,
-                    #                           getback=False)
-                    # # Talk to the lost man
-                    # if answer == 1:
-                    #     print('Talk to the lost man')
-                    # # Ignore the lost man
-                    # elif answer == 2:
-                    #     print('Stay in the forest')
-                    #     pass
                     sn.narrator('As you walk through th woods, a unique looking tree appear in front of you.')
                     sn.narrator('A abnormal tree, that look naked in fist sight')
                     sn.narrator(
@@ -571,17 +561,109 @@ def TheDarkForest(method='walk'):
 
 def Cave():
     sn.narrator('You enter the cave')
-    sn.narrator('You see an old witch-like lady and glooming mushrooms')
+    sn.narrator('an old witch-like lady catches your eye, and after a few more moments you notice the variety '
+                'of mushrooms deeper in the cave')
     while True:
         options = ["Talk with the witch", "Examine the mushrooms", "Go back to the Forest"]
         answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False, getback=False)
         # Talk with the witch
         if answer == 1:
-            print('Talk with the witch')
-            pass
+            sn.narrator("The moment you turn yourself through the witch, she disappears.")
+            sn.player("Where did she go?")
+            sn.NPC("Old witch", "Hello there you wondering child")
+            sn.narrator("Suddenly the witch reappears close to you.")
+            sn.NPC("Old witch", "Watch out. You can see the mushrooms, but not take them!")
+            sn.NPC("Old witch", "If you try to do something stupid I will curse you!")
+            sn.NPC("Old witch", "Ha Ha Ha!!!")
+
         # Examine the mushrooms
         elif answer == 2:
-            print('Examine the mushrooms')
+            sn.player("I need to go deeper into the cave to examine the mushrooms")
+            sn.narrator("As you get closer, you notice five different kinds of mushrooms")
+            while True:
+                # 1.Coral Widow | 2.Trompeta Gray Saddle | 3.Death Earthball | V 4.Hairy Grisette | 5.Cloudy Brittlegill
+                mushrooms = ["Mushroom type-A", "Mushroom type-B", "Mushroom type-C", "Mushroom type-D",
+                             "Mushroom type-E", "No"]
+                mushrooms_choose = tc.input_commend(mushrooms,
+                                                    "Do you wish to further examine on of the mushrooms?[Enter number]"
+                                                    , text_check=False, getback=False)
+                if mushrooms_choose == 1:   # Coral Widow
+                    sn.narrator("tiny blue mushroom with thin body and umbrella-like top")
+                    answer2 = tc.input_commend(['y', 'n'], "Take this mushroom? (Can only take one at once) [y/n]"
+                                               , text_check=True, getback=False)
+                    if answer2 == 1:
+                        pl.Roni.addItem("M1")
+                        sn.NPC("Old witch", "You wicked witch!!! I told you not to do it!")
+                        sn.player("Dont worry old hug, Im just about to go")
+                        sn.player("Revertere hic!")
+                        TheDarkForest(method='return spell')
+                        break
+                    elif answer2 == 2:
+                        sn.player("I don't think that this is the right one")
+                        pass
+
+                if mushrooms_choose == 2:   # Trompeta Gray Saddle
+                    sn.narrator("Hairy brown-gray hat shape like an umbrella. Medium size.")
+                    answer2 = tc.input_commend(['y', 'n'], "Take this mushroom? (Can only take one at once) [y/n]"
+                                               , text_check=True, getback=False)
+                    if answer2 == 'y':
+                        pl.Roni.addItem("M2")
+                        sn.NPC("Old witch", "You wicked witch!!! I told you not to do it!")
+                        sn.player("Dont worry old hug, Im just about to go")
+                        sn.player("Revertere hic!")
+                        TheDarkForest(method='return spell')
+                        break
+                    elif answer2 == 'n':
+                        sn.player("I don't think that this is the right one")
+                        pass
+
+                if mushrooms_choose == 3:   # Death Earthball
+                    sn.narrator("Round red top with white spots. Medium size.")
+                    answer2 = tc.input_commend(['y', 'n'], "Take this mushroom? (Can only take one at once) [y/n]"
+                                               , text_check=True, getback=False)
+                    if answer2 == 'y':
+                        pl.Roni.addItem("M3")
+                        sn.NPC("Old witch", "You wicked witch!!! I told you not to do it!")
+                        sn.player("Dont worry old hug, Im just about to go")
+                        sn.player("Revertere hic!")
+                        TheDarkForest(method='return spell')
+                        break
+                    elif answer2 == 'n':
+                        sn.player("I don't think that this is the right one")
+                        pass
+                if mushrooms_choose == 4:   # Hairy Grisette
+                    sn.narrator("Hairy white-gray rounded top. Medium size.")
+                    answer2 = tc.input_commend(['y', 'n'], "Take this mushroom? (Can only take one at once) [y/n]"
+                                               , text_check=True, getback=False)
+                    if answer2 == 'y':
+                        pl.Roni.addItem("M4")
+                        sn.NPC("Old witch", "You wicked witch!!! I told you not to do it!")
+                        sn.player("Dont worry old hug, Im just about to go")
+                        sn.player("Revertere hic!")
+                        TheDarkForest(method='return spell')
+                        break
+                    elif answer2 == 'n':
+                        sn.player("I don't think that this is the right one")
+                        pass
+
+                if mushrooms_choose == 5:   # Cloudy Brittlegill
+                    sn.narrator("Big mushroom with large unconventional brown-gray hat")
+                    answer2 = tc.input_commend(['y', 'n'], "Take this mushroom? (Can only take one the once) [y/n]"
+                                               , text_check=True, getback=False)
+                    if answer2 == 'y':
+                        pl.Roni.addItem("M5")
+                        sn.NPC("Old witch", "You wicked witch!!! I told you not to do it!")
+                        sn.player("Dont worry old hug, Im just about to go")
+                        sn.player("Revertere hic!")
+                        TheDarkForest(method='return spell')
+                        break
+                    elif answer2 == 'n':
+                        sn.player("I don't think that this is the right one")
+                        pass
+
+                if mushrooms_choose == 6:
+                    break
+
             pass
         # Go back to the Forest
         elif answer == 3:
