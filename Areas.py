@@ -686,15 +686,24 @@ def oldMansion():
                                           getback=False)
                 # Talk with the old witch
                 if answer == 1:
-                    print('Talk with the old witch')
+                    if pl.Roni.checkBag("M4") and pl.Roni.checkBag("GC"):
+                        sn.NPC("Old Witch", "correct mushroom")
+                        pl.Roni.addItem("B1")
+                    elif pl.Roni.checkBag("GC"):
+                        sn.NPC("Old Witch", "Balthazor, give me mushroom")
+                    else:
+                        sn.NPC("old witch", "...")
+
                     pass
                 # Pet the dog
                 elif answer == 2:
-                    print('Pet the dog')
+                    sn.narrator("The dog run to you and start to lick your face.")
+                    sn.player("Hello doggy!")
+                    sn.NPC("Dog", "I like Red Peppers :) Every pepper I find I hide in my stash!")
                     pass
                 # Examine the sleeping dragon
                 elif answer == 3:
-                    print('Examine the sleeping dragon')
+                    sn.narrator("You approach to the dragon, but nothing happen")
                     pass
                 # Go back
                 elif answer == 4:
@@ -711,11 +720,12 @@ def oldMansion():
                                           getback=False)
                 # Picture
                 if answer == 1:
-                    print('Picture')
+                    sn.player("This is an ugly picture.")
                     pass
                 # Armor
                 elif answer == 2:
-                    print('Armor')
+                    sn.player("There is a lot of res pepper in this armor.")
+                    pl.Roni.addItem("L9")
                     pass
                 # Old rune
                 elif answer == 3:
@@ -723,7 +733,7 @@ def oldMansion():
                     pass
                 # Nothing (go back)
                 elif answer == 4:
-                    sn.player('enough with the exploration')
+                    sn.player('enough with the exploration.')
                     break
             pass
         # Go back to the Forest
