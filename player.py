@@ -13,7 +13,7 @@ class Player:
     def __init__(self):
         self.HP = 100
         # self.bag = [IT.itemdict["URP"]]
-        self.bag = ["Unknown-road-pass", "charm of love"]
+        self.bag = []
         self.potion = []
         self.PotionRecipes = IT.PotionRecipes_dict
         self.KeyItems = ['key_1', 'key_2', 'key_3']
@@ -53,7 +53,7 @@ class Player:
         Ingredients = self.PotionRecipes[Recipe]
         for ing in Ingredients:
             if not self.checkBag(ing):
-                sc.narrator('you lack of: ' + ing)
+                sc.narrator('You lack of: ' + IT.itemdict[ing] + ".")
                 isIng = False
         if not isIng:
             sc.narrator('You need to get all the require ingredients')

@@ -52,7 +52,7 @@ class Shop:
                     sc.NPC("Apothecary", f"{ItemsList[selected_item_index]}... Let me check.")
                     sc.NPC("Apothecary", "Sorry, I dont see it on the shelf..")
                     sc.player("Do you know where I can get it?")
-                    sc.NPC("Apothecary", "Maybe some sprout in the garden")
+                    sc.NPC("Apothecary", "Maybe some sprout in the garden.")
 
                  # Blood meal
                 elif ItemsList[selected_item_index] == IT.itemdict["G5"]:
@@ -62,7 +62,7 @@ class Shop:
                     sc.NPC("Apothecary", f"If you want, you need to take {ItemsList[selected_item_index]} from them")
                     sc.player("I see.. you know where can I find them?")
                     sc.NPC("Apothecary", "No. But all the rumors cross the bartender ears.")
-                    sc.NPC("Apothecary", "Order the 'vampire kiss', and he would help you")
+                    # sc.NPC("Apothecary", "Order the 'vampire kiss', and he would help you")
                     sc.player("Thanks for the tip. I should look into it.")
 
                 # Clover blossom
@@ -77,7 +77,7 @@ class Shop:
                 # Laurel leaves
                 elif ItemsList[selected_item_index] == IT.itemdict["A5"]:
                     sc.NPC("Apothecary",
-                           f"{ItemsList[selected_item_index]} is a very rare plant. I dont sell any more.")
+                           f"{ItemsList[selected_item_index]} is a very rare plant. I dont sell anymore.")
                     sc.player("Do you know where can I find some??")
                     sc.NPC("Apothecary",
                            "If you wish for danger, you can find in on The Naked Tree, in The Dark Forest")
@@ -117,7 +117,7 @@ apothecary_store_dic = get_sub_dic(items_apothecary_store)
 ApothecaryStore = Shop(item_dic=apothecary_store_dic, oos=items_apothecary_store_oos)
 
 # Apothecary garden
-items_apothecary_garden = ["G4", "A4", "A5", "L5", "L6"]
+items_apothecary_garden = ["G4", "A4", "L5", "L6"]
 apothecary_garden_dic = get_sub_dic(items_apothecary_garden)
 ApothecaryGarden = Shop(item_dic=apothecary_garden_dic)
 

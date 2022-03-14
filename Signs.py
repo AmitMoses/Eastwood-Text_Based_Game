@@ -49,6 +49,24 @@ def danger():
     print()
 
 
+def quarter_a():
+    print('')
+    print('')
+    print('      -----------------------')
+    print('      |       Quarter-A     <')
+    print('      |----------------------')
+    print('      |                      ')
+
+
+def quarter_b():
+    print('')
+    print('')
+    print('      -----------------------')
+    print('      |       Quarter-B     <')
+    print('      |----------------------')
+    print('      |                      ')
+
+
 def tavern():
     print()
     print()

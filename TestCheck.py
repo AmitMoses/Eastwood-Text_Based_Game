@@ -24,6 +24,7 @@ def input_commend(valid_vec, text, show_options=True, text_check=True, getback=T
         valid_vec.append('Return to the town square')
     if show_options:
         options_list(valid_vec)
+
     answer = input(text)
     answer = input_check(answer, valid_vec, text, text_check)
     return answer

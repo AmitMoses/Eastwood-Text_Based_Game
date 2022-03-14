@@ -4,13 +4,14 @@ import sys
 
 
 # Time delay parameters:
-# a = 2.5
-# b = 0.2
-# c = 0.08
+a = 2.4
+a1 = 0.5
+b = 0.2
+c = 0.08
 
-a = 0
-b = 0
-c = 0
+# a = 0
+# b = 0
+# c = 0
 
 
 def narrator(text):
@@ -30,7 +31,7 @@ def player(text):
         sys.stdout.flush()
         time.sleep(c)
     print()
-    time.sleep(a)
+    time.sleep(a1)
 
 
 def NPC(name, text):
@@ -41,5 +42,5 @@ def NPC(name, text):
         sys.stdout.flush()
         time.sleep(c)
     print()
-    time.sleep(a)
+    time.sleep(a1)
 

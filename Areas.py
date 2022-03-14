@@ -329,14 +329,14 @@ def Church():
         elif answer == 2:
             print('Sacristy')
             if pl.Roni.checkBag("P2"):
-                print("kill poster")
-                print("prayes see what happen tnd thanking you")
-                print("prayers gives you information")
+                print("kill priest")
+                print("prayes see what happen tnd thanking you.")
+                print("prayers gives you information.")
                 pass
             else:
-                sn.narrator('At the moment you try to enter the Sacristy, the poster stop you and say:')
-                sn.NPC('Poster', "Greeting my child.. You have the eyes of a nun.")
-                sn.NPC('Poster', "However, you don\'t look like one..")
+                sn.narrator('At the moment you try to enter the Sacristy, the priest stop you and say:')
+                sn.NPC('Priest', "Greeting my child.. You have the eyes of a nun.")
+                sn.NPC('Priest', "However, you don\'t look like one..")
                 pass
 
         # Stay in the Main Hall
@@ -348,18 +348,18 @@ def Church():
                 # Investigate the church
                 if answer_3 == 1:
                     print('Investigate the church')
-                    sn.narrator("As Investigate the church, you notice a pile of Wooden Stake")
+                    sn.narrator("As Investigate the church, you notice a pile of Wooden Stake.")
                     sn.player("This could be useful.")
                     pl.Roni.addItem("V2")
                     pass
                 # Talk to the prayers
                 elif answer_3 == 2:
                     print('Talk to the prayers')
-                    sn.narrator("You approach the prayers")
+                    sn.narrator("You approach the prayers.")
                     sn.player("May the lord guide us in our ways.")
                     sn.NPC("Prayer 1", "He is. Always.")
-                    sn.NPC("Prayer 2", "You can take a Wooden Stake before you go out.. Good for lord's protection")
-                    sn.player("Thank you, I will")
+                    sn.NPC("Prayer 2", "You can take a Wooden Stake before you go out.. Good for lord's protection.")
+                    sn.player("Thank you, I will.")
                     pass
                 # Go somewhere else
                 elif answer_3 == 3:
@@ -415,6 +415,7 @@ def Gallows():
 
 
 def Quarter_A():
+    Signs.quarter_a()
     sn.narrator("The smell hits you like a fist.")
     sn.narrator("But what could you expect with so many houses cloistered shoulder to shoulder, ")
     sn.narrator("as if their neighbors are the only thing keeping them upright in this boxed quarter.")
@@ -445,6 +446,7 @@ def Quarter_A():
 
 
 def Quarter_B():
+    Signs.quarter_b()
     sn.narrator("Round as the coins flowing through it, this neighborhood is home to merchants, "
                 "craftsmen and many other respected citizens.")
     sn.narrator("This is a place of commerce, with paths wide enough to accommodate two wagons and imposing houses "
@@ -456,16 +458,15 @@ def Quarter_B():
     phi_pos = list(range(30, 181, 30))  # 6 options,from 0 to 180
     rho_pos = list(range(1, 8))  # 7 options,from 1 to 7
     Circular = CircularQuarter(len(rho_pos), len(phi_pos))
-    print('Quarter B')
     while True:
         print()
         options = ['Visit a house']
         answer = tc.input_commend(options, "What would you like to do?[Enter number]", text_check=False)
         if answer == 1:
             print('choose house address:')
-            rho_loc = int(tc.input_commend(rho_pos, 'enter rho coordinate:', show_options=True, text_check=True))
+            rho_loc = int(tc.input_commend(rho_pos, 'enter r coordinate:', show_options=True, text_check=True))
             phi_loc = int(tc.input_commend(phi_pos, 'enter phi coordinate:', show_options=True, text_check=True))
-            print(Circular.get_location(rho_loc, phi_loc))
+            # print(Circular.get_location(rho_loc, phi_loc))
             Circular.goto(rho_loc, phi_loc)
             Circular.print_quarter()
         elif answer == 2:
@@ -487,11 +488,11 @@ def Apothecary():
         answer = tc.input_commend(options, "Would you like enter the store?[Enter number]", text_check=False)
         # Go inside the store
         if answer == 1:
-            print('enter the store')
-            sn.narrator("Hey this is the apothecary store")
+            sn.narrator("You decided to enter the store.")
+            sn.narrator("Inside, you see only one woman - The apothecary of Eastwood")
             while True:
                 options_2 = ["Purchase ingredients", "Look inside my bag", "Mix potion", "Exit the store"]
-                answer_2 = tc.input_commend(options_2, "Would you like enter the store?[Enter number]",
+                answer_2 = tc.input_commend(options_2, "Greeting traveler. How can I help you?[Enter number]",
                                             text_check=False, getback=False)
                 # Purchase ingredients
                 if answer_2 == 1:
@@ -509,7 +510,7 @@ def Apothecary():
                 if answer_2 == 3:
                     sn.narrator("You need to choose the potion you would like to mix.")
                     sn.narrator("The potion recipe is documented in the Book of Shadows")
-                    choose_potion = input("What is the title of the page in th Book of Shadows? >>").lower()
+                    choose_potion = input("What is the title of the page in th Book of Shadows? \n>>").lower()
                     pl.Roni.makePotion(choose_potion)
                     pass
                 # Exit the store
@@ -535,8 +536,8 @@ def Unknown_road(method='from town'):
         Signs.danger()
         req_item = 'URP'
         if pl.Roni.checkBag(req_item):
-            sn.narrator(f'You have {IT.itemdict[req_item]}')
-            sn.player('I can pass this now')
+            # sn.narrator(f'You have {IT.itemdict[req_item]}')
+            sn.player('I can pass this now.')
         else:
             sn.player('I can\'t take this risk rigt now, I should go back...')
             intro_town_square()
@@ -557,13 +558,12 @@ def Unknown_road(method='from town'):
 
 
 def TheDarkForest(method='walk'):
-    sn.narrator("Massive ancient trees watch as you enter the dark forest.")
-    sn.narrator("The thick trees blot out the sun and the smell of dead plants is thick in the air.")
-    sn.narrator("The wind picks up, rustling the leaves and putting your hairs on ends.")
-    sn.narrator("You’ve braved forests before, but did the wind really just pick up?")
-
-
     if method == 'walk':
+        sn.narrator("Massive ancient trees watch as you enter the dark forest.")
+        sn.narrator("The thick trees blot out the sun and the smell of dead plants is thick in the air.")
+        sn.narrator("The wind picks up, rustling the leaves and putting your hairs on ends.")
+        sn.narrator("You’ve braved forests before, but did the wind really just pick up?")
+
         sn.narrator('You walk slowly into the tall trees in the beginning of the forest')
         sn.narrator('As you enter you notice a large bolder with engraving:')
         sn.narrator('To Return: \" Revertere hic \" ')
@@ -612,10 +612,11 @@ def TheDarkForest(method='walk'):
                         pass
                 # Lost Man
                 elif Maze.maze[Maze.y][Maze.x] == Maze.goal_naked_tree:
-                    sn.narrator('As you walk through th woods, a unique looking tree appear in front of you.')
+                    sn.narrator('As you walk through the woods, a unique looking tree appear in front of you.')
                     sn.narrator('A abnormal tree, that look naked in fist sight')
                     sn.narrator(
-                        'Despite it almost without leaves, it manege to prosper more then all the other trees in the forest')
+                        'Despite it almost without leaves, it manage to prosper better then any other '
+                        'trees in the forest')
                     sn.player('Found it, The Naked Tree.. I can always trust the book of shadows')
                     pl.Roni.addItem('A5')
 
@@ -916,21 +917,23 @@ def VampireDen():
 
         while True:
             options = ["I came for Blood meal", "Nothing, I should go back"]
-            answer = tc.input_commend(options, "Would you like to do?[Enter number]", text_check=False, getback=False)
+            answer = tc.input_commend(options, "Choose your answer [Enter number]", text_check=False, getback=False)
 
             # I came for Blood meal
             if answer == 1:
                 if pl.Roni.checkBag("V2"):
                     sn.player("I came for the Blood meal, bring me to your queen")
                     sn.NPC("Regal looking woman", "Only if you wish death! The holy water can only repelled us")
-                    sn.player("VAMPIRE QUEEN! I CAM FOR YOU! SHOW YOURSELF")
                     sn.narrator("you decided to ignore the women and call the queen loudly")
+                    sn.player("VAMPIRE QUEEN! I CAM FOR YOU! SHOW YOURSELF")
                     sn.narrator("Suddenly, enormous bat came from the ceiling, transform to a woman and "
                                 "stand in front of you")
                     sn.NPC("The Vampire Queen", "Here I am. What do you want?")
                     sn.narrator("you pull out your wooden stake and kill her.")
                     pl.Roni.addItem("G5")
-                    sn.player("Thank for the blood meal")
+                    sn.player("Thank for the blood meal, I walk myself out")
+                    sn.narrator("All the vampires too afraid from you to do something.")
+                    sn.narrator("You leave the vampire's dan without problem...")
                     break
                 else:
                     sn.player("I came for the Blood meal")
@@ -954,4 +957,5 @@ def HuntedHouse():
         print("Thank you, I will give you this information")
         pass
     else:
+        print("Please help me banish the ghost")
         pass
