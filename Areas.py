@@ -208,10 +208,41 @@ class Swamp:
                             pass
 
                         elif winJavna and winSuccubus:
-                            sn.narrator("you approach both of them and banish them")
-                            print("after you do, the fishermen and his wife came to thank you and give you information")
-                            sn.narrator("https://www.timeanddate.com/countdown/to?iso=20220321T15&p0=676&msg=1&font=cursive&csz=1")
+                            sn.narrator("You walk as quietly as you can through the swamp,")
+                            sn.narrator("until an eerie sight greets your eyes. Not swamp gas,")
+                            sn.narrator("but actually a few lit lanterns of different colours surrounding a cage "
+                                        "holding two figures.")
+                            sn.narrator("You see a young couple being withdrawn from the rusty cage by a winged "
+                                        "monster")
+                            sn.narrator("and a beautiful lady with a snake’s tongue - your queries.")
+                            sn.narrator("The two monsters begin to dance with the charmed humans,")
+                            sn.narrator(" the succubus grazing the male with her tongue and teeth,")
+                            sn.narrator("and the Javna nibbling on the maiden before her.")
+                            sn.narrator("You pour your backup bottle of holy water to the ground as a quick means to "
+                                        "consecrate it")
+                            sn.narrator("and draw a penis on the swamp ground with broken twigs.")
+                            sn.narrator("You light a few candles around it and kneel upon it.")
+                            sn.narrator("As soon as the candles are lit, the succubus approaches you hungrily,")
+                            sn.narrator("not realizing you’ve began chanting her doom")
+                            sn.player("By the forces of heaven and hell. Draw to us this woman fell. ")
+                            sn.player("Rend from her foul desire. That she may perish as a moth to fire.")
+                            sn.narrator("And the succubus steps unto the twig-penis she bursts into flames,")
+                            sn.narrator("screaming and flailing away from you into the swamp that does nothing against "
+                                        "the arcane flames.")
+                            sn.narrator("The Javna takes flight, rushing you down as you fumble for the "
+                                        "Hand of Fatima.")
+                            sn.narrator("Just before you’re struck down you rush to the succubus,")
+                            sn.narrator("giving her a soft hug as she burns in arcane flames that do nothing to you,")
+                            sn.narrator("but a lot to dissuade the approaching Javna.")
+                            sn.narrator("You take this precious moment to grab the Hand of Fatima and chant loudly")
+                            sn.player("Evil eyes, look unto thee. May they soon extinguished be,")
+                            sn.player("Bend thy will to the power of three,Eye of earth, evil and accursed.")
+                            sn.narrator("And as the Succubus stops her flailing the Javna is sucked through the "
+                                        "Hand to hell.")
+                            sn.narrator("...")
                             Signs.quest_end()
+                            sn.narrator(
+                                "https://www.timeanddate.com/countdown/to?iso=20220321T15&p0=676&msg=1&font=cursive&csz=1")
                             pass
 
 
@@ -430,11 +461,36 @@ def Gallows():
         elif answer == 2:
             print('Approach the stage')
             if pl.Roni.checkBag("B1"):
-                print("kill demon")
-                print("save witch from death")
-                print("witch thank you and gives you information")
-                sn.narrator("https://www.timeanddate.com/countdown/to?iso=20220320T14&p0=676&msg=2&font=cursive&csz=1")
+                sn.narrator("You’ve seen enough.")
+                sn.narrator("You cut in front of the woman being led to the stage and grab the knot of the empty noose "
+                            "as you begin to chant:")
+                sn.player("MAGIC FORCES, BLACK AND WHITE, REACHING OUT THROUGH, SPACE AND LIGHT, BE HE FAR OR, "
+                          "BE HE NEAR, BRING US THE DEMON ,BELTHAZOR HERE")
+                sn.narrator("The executioner jumps off the ground as his head is pulled through the noose,")
+                sn.narrator("which you tighten with a quick satisfying tug.")
+                sn.narrator("What first seems like the rosy cheeks of asphyxiation, turns out to be the bloody head of "
+                            "a demon.")
+                sn.narrator("Belthazor’s red features come into the crowd’s view,")
+                sn.narrator("everyone begins to flee under the terrifying gaze of his blood-shot eyes.")
+                sn.narrator("Your ears pop as the demon opens his mouth to taunt you:")
+                sn.NPC("BELTHAZOR", "Great parlor tricks witch, did you think I require breath?")
+                sn.NPC("BELTHAZOR", "Or maybe that I’m just going to wrench my own neck with this rotten piece of "
+                                    "string?")
+                sn.narrator("Your senses scream at you to flee with the crowd, never to be seen again, away from this "
+                            "monstrosity.")
+                sn.narrator("A hand twitches at the noose, a hand that feels almost incorporeal,")
+                sn.narrator("what should be your hand but completely numb -")
+                sn.narrator("sets spittle flying out of the demon’s mouth in a grotesque yet comical expression,")
+                sn.narrator("as your sense of self returns you break the potion at Belthazor’s feet, chanting:")
+                sn.player("SPIRITS OF AIR, FOREST AND SEA; SET US OF THIS DEMON FREE; BEASTS OF HOOF AND BEASTS OF "
+                          "SHELL, DRIVE THIS EVIL BACK TO HELL!")
+                sn.narrator("Belathzor’s eyes bulge as a portal to hell opens at his feet,")
+                sn.narrator("pulling at him in complete disregard of the disagreeing noose.")
+                sn.narrator("Just as the demon’s neck begins bending, the noose snaps and Belathzor plunges back to "
+                            "hell.")
+                sn.narrator("...")
                 Signs.quest_end()
+                sn.narrator("https://www.timeanddate.com/countdown/to?iso=20220320T14&p0=676&msg=2&font=cursive&csz=1")
                 pass
             else:
                 print("The executor stop you")
@@ -997,9 +1053,31 @@ def HuntedHouse():
     sn.narrator("The door is open, so you let yourself in...")
 
     if pl.Roni.checkBag("P1"):
-        print("Thank you, I will give you this information")
-        sn.narrator("https://www.timeanddate.com/countdown/to?iso=20220318T16&p0=676&msg=4&font=cursive&csz=1")
+        sn.narrator("You feel cold sweat cover your skin at the sound of silence, your ears stand ready for a sudden "
+                    "shriek.")
+        sn.narrator("The couple greets you warmly again, as you ask about your goal - the ghost’s bones.")
+        sn.NPC("The Husband", "Never seen no bones round here, young lady")
+        sn.NPC("The Wife", "But you are welcome to look, love. Maybe take a look at our gallery before the ghost will "
+                           "disturb us again?")
+        sn.narrator("You grudgingly accept.")
+        sn.narrator("As you’re taken through the “gallery” and through the entire “creative process” - ")
+        sn.narrator("that created EACH AND EVERY ONE of these things,")
+        sn.narrator(" you notice something surprisingly white-ish in this sea of brown, black and green.")
+        sn.NPC("The Wife", "Oh, this? A dog unearthed some driftwood in our yard and we put it to good use.")
+        sn.NPC("The Husband", "The white colour beneath the dirt is nice, isn’t it?")
+        sn.player("Driftwood here? Unearthed? ")
+        sn.narrator("You rub the “driftwood” with a piece of discarded cloth and lo and behold - these are bones.")
+        sn.narrator("A shriek builds in the heart of the house and the ghost begins to manifest,")
+        sn.narrator("you quickly uncork the mixture and pour it onto the bones.")
+        sn.narrator("As you pour the mixture onto the bones they hiss and slightly crack, ")
+        sn.narrator("but the sculptures remain standing, and the ghost does not form.")
+        sn.player("Thank you for your hospitality, make sure you get enough sleep")
+        sn.player("and only make sculptures if you truly feel that’s right for you.")
+        sn.narrator("The air feels warmer as you leave the joyous sculptures and refuse to have your likeness "
+                    "sculpted.")
+        sn.narrator("...")
         Signs.quest_end()
+        sn.narrator("https://www.timeanddate.com/countdown/to?iso=20220318T16&p0=676&msg=4&font=cursive&csz=1")
         pass
     else:
         sn.narrator("If houses had a moral compass, this one would be evil.")
