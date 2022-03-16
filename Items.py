@@ -39,7 +39,7 @@ itemdict = {
 PotionRecipes_dict = {
     "banishing a ghost": ['G1', 'G2', 'G3', 'G4', 'G5'],
     "demon of anarchy": ['A1', 'A2', 'A3', 'A4', 'A5'],
-    "charm of love": ['L1', 'L2', 'L3', 'L5', 'L5', 'L6', 'L7', 'L8', 'L9', 'A2']
+    "charm of love": ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8', 'L9', 'A2']
 }
 
 

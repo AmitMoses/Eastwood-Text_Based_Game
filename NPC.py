@@ -45,7 +45,7 @@ class TheBartender:
                 sn.narrator("you place your hand over the mug.")
                 sn.player("I require directions, barkeep. I’m in need of some special supplies - black jin.")
                 self.speak("And I’m thinking that the hushed tones mean ‘special’ is actually ‘contraband’.")
-                self.player("There’s a demon in town and to banish it I need more than a leg from a discarded stool.")
+                sn.player("There’s a demon in town and to banish it I need more than a leg from a discarded stool.")
                 self.speak("Say no more, witch. You’ve helped us enough already, ridding us from the vampires.")
                 self.speak("Give me your map - that’s where you’ll find the black market.")
                 sn.narrator("The bartender marks on your map the coordinate: x=X(1), y=X(2).")

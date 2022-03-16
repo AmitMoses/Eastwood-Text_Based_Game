@@ -4,7 +4,7 @@ import sys
 
 
 # Time delay parameters:
-a = 2.8
+a = 3
 a1 = 0.5
 b = 0.2
 c = 0.08
@@ -12,6 +12,7 @@ c = 0.08
 # a = 0
 # b = 0
 # c = 0
+# a1 = 0
 
 
 def narrator(text):

@@ -14,7 +14,7 @@ def intro():
     sn.player('What is this place?')
 
     Signs.openSign()
-    answer = tc.input_commend(['yes', 'no'], "Do you wish to continue? [yes/no]", show_options=False, getback=False)
+    answer = tc.input_commend(['yes', 'no', 'always'], "Do you wish to continue? [yes/no]", show_options=False, getback=False)
     return answer
 
 
@@ -32,6 +32,17 @@ def main():
         Areas.intro_town_square()
     elif answer.lower().strip() == "no":
         sn.player('Maybe another day..')
+    elif answer.lower().strip() == "always":
+        sn.narrator("...")
+        sn.narrator("...")
+        sn.narrator("...")
+        sn.narrator("A very familiar man just arrived.")
+        sn.NPC("Amit", "Hey! How long have you been here?")
+        sn.NPC("Amit", "I just want to tell you - I love you Roni, more then anything else...")
+        sn.NPC("Amit", "and...   I have one final surprise for you :)")
+        sn.narrator("...")
+        sn.NPC("Amit", "Check Moka :)")
+        Signs.end_pic()
 
 
 if __name__ == '__main__':
