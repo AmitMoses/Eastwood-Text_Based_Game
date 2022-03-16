@@ -4,7 +4,7 @@ import sys
 
 
 # Time delay parameters:
-a = 2.4
+a = 2.8
 a1 = 0.5
 b = 0.2
 c = 0.08

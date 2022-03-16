@@ -13,7 +13,7 @@ class Player:
     def __init__(self):
         self.HP = 100
         # self.bag = [IT.itemdict["URP"]]
-        self.bag = ["banishing a ghost"]
+        self.bag = ["demon of anarchy", "Holy water", "Wooden stake"]
         self.potion = []
         self.PotionRecipes = IT.PotionRecipes_dict
         self.KeyItems = ['key_1', 'key_2', 'key_3']

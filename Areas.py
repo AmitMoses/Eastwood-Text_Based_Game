@@ -301,8 +301,8 @@ def Church():
     sn.narrator('Tall middle tower with ancient cross on top of it.')
     sn.narrator('A great gate with enormous wooden doors between two statues.')
     sn.narrator('Well kept gardens with fragrant flowers, gorgeous trees and many bushes decorate the outside...')
-    sn.narrator('As you enter to the Main Hall, The pastor finish the pray and leave the Alter to enter the Sacristy')
-    sn.narrator('Bunch of prayer are still in the Main Hall')
+    sn.narrator('As you enter to the Main Hall, The pastor finish the pray and leave the Alter to enter the Sacristy.')
+    sn.narrator('Bunch of prayer are still in the Main Hall.')
     print()
     while True:
         options = ["Alter", "Sacristy", "Stay in the Main Hall"]
@@ -334,12 +334,34 @@ def Church():
         elif answer == 2:
             print('Sacristy')
             if pl.Roni.checkBag("P2"):
-                print("kill priest")
-                print("prayes see what happen tnd thanking you.")
-                print("prayers gives you information.")
-                sn.narrator("https://www.timeanddate.com/countdown/to?iso=20220319T12&p0=676&msg=3&font=cursive&csz=1")
+                sn.narrator("You arrive late at the church, walking against the bickering crowd of the evening sermon.")
+                sn.player("I find my soul burdened priest, will you hear my confession?")
+                sn.NPC("Priest", "Of course my lovely child, come after me")
+                sn.narrator("You follow the priest to the confession booth,")
+                sn.narrator("entering from the right as he enters from the left and opens a grated window between the "
+                            "two of you.")
+                sn.NPC("Priest", "What is it you wish to confess, child? What sins do you bear?")
+                sn.narrator("The glass globe feels warm in your hand as you begin to chant as softly as possible:")
+                sn.player("Sower of discord you work must cease")
+                sn.narrator("The priest leans greedily towards the window.")
+                sn.NPC("Priest", "Speak up child, do not let fear control your tongue - tell me all, embrace what you "
+                                 "are")
+                sn.narrator("And through the grated open window you splash the potion onto the demon, who recoils "
+                            "in disgust.")
+                sn.player("I vanquish thee now with these words of peace")
+                sn.narrator("Sitting still now with your palms pressed together and your eyes gently shut,")
+                sn.narrator("your mind finds momentary peace, silence,")
+                sn.narrator("the machinations of the spell take effect calmly through your mind,")
+                sn.narrator("like gentle hands easing the priest onto true peace, calming,")
+                sn.narrator("and quieting him as they gently caress his head.")
+                sn.narrator("You let go of the breath you were holding and approach the priest’s side of the booth.")
+                sn.narrator("On the floor you find the Demon of Anarchy in what might have seemed like a gentle sleep "
+                            "if his windpipe wasn't completely crushed.")
+                sn.narrator("...")
                 Signs.quest_end()
+                sn.narrator("https://www.timeanddate.com/countdown/to?iso=20220319T12&p0=676&msg=3&font=cursive&csz=1")
                 pass
+
             else:
                 sn.narrator('At the moment you try to enter the Sacristy, the priest stop you and say:')
                 sn.NPC('Priest', "Greeting my child.. You have the eyes of a nun.")
@@ -918,11 +940,11 @@ def VampireDen():
         sn.narrator("As you gape at the sheer size of it all your eyes finally focus on 6 pale bedraggled "
                     "figures seated at the table,")
         sn.narrator("recoiling slightly from your presence, and a regal looking woman lounging at their head.")
-        sn.NPC("Regal looking woman", "Go ahead")
+        sn.NPC("Vampire lady", "Go ahead")
         sn.narrator("she tells you in an amused manner")
-        sn.NPC("Regal looking woman", "Say it.")
+        sn.NPC("Vampire lady", "Say it.")
         sn.player("It's smaller on the outside")
-        sn.NPC("Regal looking woman", "Ok, that's a first. Now - what brings you to Our castle, witch?")
+        sn.NPC("Vampire lady", "Ok, that's a first. Now - what brings you to Our castle, witch?")
 
         while True:
             options = ["I came for Blood meal", "Nothing, I should go back"]
@@ -931,23 +953,35 @@ def VampireDen():
             # I came for Blood meal
             if answer == 1:
                 if pl.Roni.checkBag("V2"):
-                    sn.player("I came for the Blood meal, bring me to your queen")
-                    sn.NPC("Regal looking woman", "Only if you wish death! The holy water can only repelled us")
-                    sn.narrator("you decided to ignore the women and call the queen loudly")
-                    sn.player("VAMPIRE QUEEN! I CAM FOR YOU! SHOW YOURSELF")
-                    sn.narrator("Suddenly, enormous bat came from the ceiling, transform to a woman and "
-                                "stand in front of you")
-                    sn.NPC("The Vampire Queen", "Here I am. What do you want?")
-                    sn.narrator("you pull out your wooden stake and kill her.")
+                    sn.player("Flowers")
+                    sn.NPC("Vampire lady", "I will offer you a seat next to our queen to talk about flora.")
+                    sn.narrator("She take you upstairs, to a large dining table with dozen vampires. Between them, "
+                                "the vampire queen")
+                    sn.narrator("As you reach the subject of fertiliser the queen grins,")
+                    sn.NPC("Vampire Queen", "Surely we can come to an arrangement, a witch of your calibre must be able"
+                                            " to guide a few lost souls here.")
+                    sn.NPC("Vampire Queen", "Better be food to Us and our family than begging on the streets.")
+                    sn.narrator("You casually place the bottle of holy water on the table, idly spinning it.")
+                    sn.player("I did not come to threaten your highness, I came to slay you.")
+                    sn.NPC("Vampire Queen", "A splash of priest juice won’t do more than a slight burn to me")
+                    sn.narrator("You toss the bottle of holy water up - ")
+                    sn.narrator("the vampires’ eyes are glued to it as it hits the ceiling in a splash.")
+                    sn.narrator(" But as the others leap away from the table the queen sits firmly,")
+                    sn.narrator("determined to make a show of force here - holy water would not be enough.")
+                    sn.narrator("Maybe even the wooden stake in your hands wouldn't be enough if she wasn't so caught "
+                                "up on the spectacle.")
+                    sn.narrator("You drive into her chest with one hand as the queen's hand belatedly tries to grab "
+                                "the stake - ")
+                    sn.narrator("so you let go of the stake and grab onto her shoulders,")
+                    sn.narrator("slamming her into the dining table and driving the stake to her heart.")
+                    sn.narrator("The easy regicide makes for a compelling argument to the rest of the vampires")
+                    sn.narrator("to flee this city for good.")
+                    sn.narrator("You return a few minutes later realizing you forgot the blood-meal in your spectacle.")
                     pl.Roni.addItem("G5")
-                    sn.player("Thank for the blood meal, I walk myself out")
-                    sn.narrator("All the vampires too afraid from you to do something.")
-                    sn.narrator("You leave the vampire's dan without problem...")
                     break
                 else:
                     sn.player("I came for the Blood meal")
-                    sn.NPC("Regal looking woman", "Ha Ha... child, you will have to take it directly from "
-                                                  "the vampire queen")
+                    sn.NPC("Vampire lady", "Ha Ha... child, you will have to take it directly from the vampire queen")
                     sn.player("The vampire queen? I can not deal with her right now, holy water isn't enough")
                     break
             if answer == 2:
@@ -968,5 +1002,23 @@ def HuntedHouse():
         Signs.quest_end()
         pass
     else:
-        print("Please help me banish the ghost")
+        sn.narrator("If houses had a moral compass, this one would be evil.")
+        sn.narrator("The windows seem to reflect the same starless sky regardless of the time")
+        sn.narrator("and a heavy blanket of silence covers the grounds despite a buffeting wind.")
+        sn.narrator("A high shriek pierces that blanket, stealing the air from your lungs -")
+        sn.narrator("but for a moment so short, so free of evidence, it may have never happened.")
+        sn.narrator("...")
+        sn.narrator("Then it happens again, must be the haunted house then.")
+        sn.narrator("An adult couple with a desperate need for sleep greets you as warmly as they can,")
+        sn.narrator("offering tea before remembering all the cups were shattered.")
+        sn.narrator("You look a bit around the house and see sculptures abound, big and small, depicting humanoid "
+                    "figures or just strange symbols.")
+        sn.NPC("The Husband", "Sleepin’ gets rough at times, so the missus and I build dem sculptures you see around ‘ere")
+        sn.NPC("The Wife", "I think the ghost may like it. we tend to get a few hours of silence after building one, "
+                           "but we’re running out of space and ideas")
+        sn.NPC("The Husband", "Ghosts don’ appreciate repetition, young lady")
+        sn.NPC("The Wife", "Will you help us and banish this ghost? We’d so like to have a full night for ourselves… To sleep.")
+        sn.narrator("The ghost begins to screech and manifest in the living room, ")
+        sn.narrator("so given you’ve seen enough art for one day, it feels like a good time to leave.")
+        sn.player("I will get back here and help you. Goodbye for now. Stay safe.")
         pass
