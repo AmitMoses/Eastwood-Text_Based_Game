@@ -210,6 +210,8 @@ class Swamp:
                         elif winJavna and winSuccubus:
                             sn.narrator("you approach both of them and banish them")
                             print("after you do, the fishermen and his wife came to thank you and give you information")
+                            sn.narrator("https://www.timeanddate.com/countdown/to?iso=20220321T15&p0=676&msg=1&font=cursive&csz=1")
+                            Signs.quest_end()
                             pass
 
 
@@ -219,6 +221,7 @@ def intro_town_square():
 
     if pl.Roni.checkBag("P3"):
         print("final information")
+        sn.narrator("")
         print("END")
         Signs.end()
         pass
@@ -259,8 +262,8 @@ def Tavern():
     sn.narrator('The tavern itself is almost completely abandoned. The few people inside could be locals, could be '
                 'lost souls,')
     sn.narrator('but whoever they are, it\'s about the clearest sign you can get, telling you you don\'t belong.')
-    sn.narrator('...')
-    sn.narrator('After few second you notice a strange looking man near the fireplace... He does not seems local...')
+    sn.narrator("You take yourself a drink and seat down for few minutes.")
+    sn.narrator("...")
     print()
     while True:
         options = ["Order from the bartender", "Seat and eavesdrop", "Talk to the stranger"]
@@ -272,11 +275,13 @@ def Tavern():
         # Seat and eavesdrop
         elif answer == 2:
             print('Seat and eavesdrop')
-            sn.narrator("You decided to sit down, while the drunk people tell tales...")
+            sn.narrator("You decided to sit down, while the drunk people trade information...")
             sn.NPC("Drunk 1", "I tell you... you can buy rare and illegal stuff in there.")
-            sn.NPC("Drunk 2", "You did not been there, you dont have the guts.")
-            sn.NPC("Drunk 1", "So how do I now that it is locate on Quarter A, at: x=X(1), y=X(2).")
-            sn.NPC("Drunk 2", "You are full of bullshit.")
+            sn.NPC("Drunk 2", "I can't go there, it is too dangerous. However, I have to buy it. ")
+            sn.NPC("Drunk 1", "Listen, you payed me already for the information, so I will give you the password "
+                              "and you decide whatever you want.")
+            sn.NPC("Drunk 2", "Ok, what is the password?")
+            sn.NPC("Drunk 1", "MATRIMIM.")
             sn.player("I heard enough.")
             pass
         # Talk to the stranger
@@ -332,6 +337,8 @@ def Church():
                 print("kill priest")
                 print("prayes see what happen tnd thanking you.")
                 print("prayers gives you information.")
+                sn.narrator("https://www.timeanddate.com/countdown/to?iso=20220319T12&p0=676&msg=3&font=cursive&csz=1")
+                Signs.quest_end()
                 pass
             else:
                 sn.narrator('At the moment you try to enter the Sacristy, the priest stop you and say:')
@@ -404,6 +411,8 @@ def Gallows():
                 print("kill demon")
                 print("save witch from death")
                 print("witch thank you and gives you information")
+                sn.narrator("https://www.timeanddate.com/countdown/to?iso=20220320T14&p0=676&msg=2&font=cursive&csz=1")
+                Signs.quest_end()
                 pass
             else:
                 print("The executor stop you")
@@ -955,6 +964,8 @@ def HuntedHouse():
 
     if pl.Roni.checkBag("P1"):
         print("Thank you, I will give you this information")
+        sn.narrator("https://www.timeanddate.com/countdown/to?iso=20220318T16&p0=676&msg=4&font=cursive&csz=1")
+        Signs.quest_end()
         pass
     else:
         print("Please help me banish the ghost")

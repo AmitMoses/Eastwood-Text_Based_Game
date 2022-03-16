@@ -56,14 +56,24 @@ class Shop:
 
                  # Blood meal
                 elif ItemsList[selected_item_index] == IT.itemdict["G5"]:
-                    sc.NPC("Apothecary", f"{ItemsList[selected_item_index]}... They took it all..")
-                    sc.player("Who?")
-                    sc.NPC("Apothecary", "The Vampires.. for their Queen...")
-                    sc.NPC("Apothecary", f"If you want, you need to take {ItemsList[selected_item_index]} from them")
-                    sc.player("I see.. you know where can I find them?")
+                    sc.NPC("Apothecary", f"{ItemsList[selected_item_index]}... ")
+                    sc.NPC("Apothecary", "You’re treading dangerous grounds, young witch.")
+                    sc.NPC("Apothecary", "What you are looking for is in a house in the better part of town, "
+                                         "but you’ll have to find a way not to get eaten alive there -")
+                    sc.NPC("Apothecary", "it’s rumoured to be crawling with blood sucking vampires.")
+                    sc.NPC("Apothecary", "They say their queen likes her roses, but nothing would grow without "
+                                         "blood-meal next to her den.")
+                    sc.NPC("Apothecary", "The ol’ gardener is always keeping anyone from touching his blood-meal, "
+                                         "might be the blood sucker charmed him.")
+                    sc.NPC("Apothecary", " Might be she just threatened him. Either way all of it is in that house.")
+                    sc.player("I see.. you know where exactly?")
                     sc.NPC("Apothecary", "No. But all the rumors cross the bartender ears.")
-                    # sc.NPC("Apothecary", "Order the 'vampire kiss', and he would help you")
                     sc.player("Thanks for the tip. I should look into it.")
+
+
+
+
+
 
                 # Clover blossom
                 elif ItemsList[selected_item_index] == IT.itemdict["A3"]:

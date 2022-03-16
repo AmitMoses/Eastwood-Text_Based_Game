@@ -40,32 +40,41 @@ class TheBartender:
 
             # black jin
             elif order_ == self.codewords[1]:
-                sn.narrator("The bartender looked behind you to varify nobody listen.")
-                self.speak("I was in the black market... like every merchant.")
-                self.speak("To get in you need to know the password: MATRIMIM.")
-                sn.narrator("The bartender say it while pouring you a chaser of dark jin.")
+                sn.narrator("You leisurely finish your mug of ale and as the barkeep approaches you to suggest a "
+                            "refill,")
+                sn.narrator("you place your hand over the mug.")
+                sn.player("I require directions, barkeep. I’m in need of some special supplies - black jin.")
+                self.speak("And I’m thinking that the hushed tones mean ‘special’ is actually ‘contraband’.")
+                self.player("There’s a demon in town and to banish it I need more than a leg from a discarded stool.")
+                self.speak("Say no more, witch. You’ve helped us enough already, ridding us from the vampires.")
+                self.speak("Give me your map - that’s where you’ll find the black market.")
+                sn.narrator("The bartender marks on your map the coordinate: x=X(1), y=X(2).")
                 sn.player("Thanks for the drink.")
 
             # red & black liqueur
             elif order_ == self.codewords[2]:
-                sn.narrator("The bartender looked behind you to varify nobody listen.")
-                self.speak("So they sent you... Makes sense...")
-                self.speak("Listen closely because wat Im about to say ain't a rumor.")
-                self.speak("The executor at the gallows its human. He is a very powerful demon.")
-                self.speak("Go to the gallows to figure out.")
-                pl.Roni.addItem("GC")
+                sn.player("Tell me about the red & black liquor barkeep.")
+                self.speak("Aye now that’s a grim story. A grim present actually.")
+                self.speak("Young women are being executed for witchcraft and heresy every so often at the city square "
+                           "over the last few years,")
+                self.speak("rumour has it that it’s always the same executioner. That’s uncommon with witch hunters, "
+                           "they usually travel.")
                 sn.player("I will investigate it.")
+                pl.Roni.addItem("GC")
 
             # mudbeer
             elif order_ == self.codewords[3]:
-                sn.narrator("The bartender looked behind you to varify nobody listen.")
-                self.speak("You again... I can work with that...")
-                self.speak("Have you ever been in The Swamps?")
-                sn.player("No... Why?")
-                self.speak("Today is your day... But not in the good way.")
-                self.speak("There a rumors about demos that came to hunt the young woman and man of Eastwood")
+                sn.narrator("You contemplate your drink and turn to the barkeep.")
+                sn.player("No offence barkeep, but what about ‘mudbeer’?")
+                self.speak("So it’s two in one now, huh? Well you proved yourself more than once.")
+                self.speak("The men and women of this city are at the mercy of two monsters - one who feeds on young "
+                           "maidens, and second who seduces men.")
+                self.speak("The worst has happened and these two must have realized they can split the city between "
+                           "them,")
+                self.speak("so not only they don’t fight over hunting grounds, they work together and sometimes even "
+                           "target couples.")
                 self.speak("Little I know about their powers, but their origin is in The Swamps")
-                sn.player("Ok. Anything I should know about The Swamps?")
+                sn.player("Anything I should know about The Swamps?")
                 self.speak("It is not shape like The Dark Forest, there is no map the will help you.")
                 self.speak("There is a fisherman that live in there, you should investigate him")
                 pl.Roni.addItem("URP")
