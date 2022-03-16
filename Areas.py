@@ -134,7 +134,7 @@ class ForestMaze:
 
     def blockCheck(self, x, y):
         isBlock = False
-        print('blockCheck, x = {}, y = {}'.format(x,y))
+        # print('blockCheck, x = {}, y = {}'.format(x,y))
         if x < 0 or x > self.width or y < 0 or y > self.height:
             # print('out of maze')
             isBlock = True
@@ -192,10 +192,10 @@ class Swamp:
                 TheSwamp(method='spell')
             else:
                 self.path.append(answer)
-                print(self.path)
+                # print(self.path)
                 if len(self.path) >= len(self.correct_path):
                     if self.path[-len(self.correct_path)::] == self.correct_path:
-                        print('Found it!')
+                        # print('Found it!')
                         sn.narrator("The fog start to disappear... you notice two figures in ahead of you")
                         winJavna = pl.Roni.checkBag("S1")
                         winSuccubus = pl.Roni.checkBag("S2")
@@ -675,7 +675,8 @@ def TheDarkForest(method='walk'):
             Maze = ForestMaze()
             while True:
                 options = ['w', 's', 'd', 'a', 'Revertere hic']
-                answer = tc.input_commend(options, "Which direction?", text_check=True, getback=False)
+                answer = tc.input_commend(options, "Which direction? [w/d/s/a]",
+                                          text_check=True, getback=False, show_options=False)
                 Maze.move(answer)
                 # Old Mansion
                 if Maze.maze[Maze.y][Maze.x] == Maze.goal_mansion:

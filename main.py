@@ -14,7 +14,8 @@ def intro():
     sn.player('What is this place?')
 
     Signs.openSign()
-    answer = tc.input_commend(['yes', 'no', 'always'], "Do you wish to continue? [yes/no]", show_options=False, getback=False)
+    answer = tc.input_commend(['yes', 'no', 'always'], "Do you wish to continue? [yes/no]",
+                              show_options=False, getback=False)
     return answer
 
 
@@ -30,8 +31,10 @@ def main():
         sn.narrator('The path looks abandoned, like nobody take it for a while..')
         sn.narrator('You arrived to the middle of small town... Eastwood as the old sign described..')
         Areas.intro_town_square()
+
     elif answer.lower().strip() == "no":
         sn.player('Maybe another day..')
+
     elif answer.lower().strip() == "always":
         sn.narrator("...")
         sn.narrator("...")
