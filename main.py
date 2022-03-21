@@ -39,13 +39,19 @@ def main():
         sn.narrator("...")
         sn.narrator("...")
         sn.narrator("...")
-        sn.narrator("A very familiar man just arrived.")
-        sn.NPC("Amit", "Hey! How long have you been here?")
-        sn.NPC("Amit", "I just want to tell you - I love you Roni, more then anything else...")
+        sn.narrator("You encounter the hooded man from yesterday - your informer.")
+        sn.NPC("Your informer", "Good morning Roni.")
+        sn.narrator("He takes off his hood")
+        sn.narrator("He had a very familiar face...")
+        sn.NPC("Amit", "Yes, It was me all along.")
+        sn.NPC("Amit", "I just want to tell you one thing - I love you Roni, more then anything else...")
         sn.NPC("Amit", "and...   I have one final surprise for you :)")
         sn.narrator("...")
         sn.NPC("Amit", "Check Moka :)")
+        sn.narrator("...")
         Signs.end_pic()
+        while True:
+            pass
 
 
 if __name__ == '__main__':

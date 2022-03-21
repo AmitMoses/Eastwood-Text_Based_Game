@@ -255,17 +255,25 @@ def intro_town_square():
         sn.narrator("As you walk in the town square,  a pleasant breeze began to form")
         sn.narrator("The the sky doesn't looks so grey anymore...")
         sn.narrator("It's the sun. You can fill the warm of it on your skin.")
-        sn.narrator("Eastwood is safe now, Thanks to you")
+        sn.narrator("Eastwood is safe now, Thanks to you.")
 
         Signs.end()
 
         sn.narrator("...")
         sn.narrator("...")
         sn.narrator("...")
-        sn.NPC("You Informer", "Roni! before it is ending, there is one more thing... "
-                               "Check your mailbox one more time.")
+        sn.narrator("Hooded man approach to you from the tavern direction.")
+        sn.narrator("It is your informer.")
+        sn.NPC("You Informer", "Roni! before it is ending, there is one more thing... ")
+        sn.NPC("You Informer", "Tomorrow, at 9:15 AM, meet me in this location:")
+        sn.NPC("You Informer", "32.031427, 34.820806")
+        sn.NPC("You Informer", "It is a great place to bring a dog, so take Moka with you.")
+        sn.NPC("You Informer", "Goodbye for now.")
+        sn.player("In order to meet him, I need to enter Eastwood from this location.")
         sn.narrator("...")
-        pass
+        sn.narrator("...")
+        while True:
+            pass
     else:
         sn.narrator("You can see around you the different parts of the town.")
         # Signs.options(Locations)
